@@ -2,11 +2,6 @@ import sys
 
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QMessageBox
-
-import ui.pedestrian_detection_UI
-import ui.system
-
 
 #
 # class Designer(QMainWindow, ui.system.Ui_systemClass):
@@ -27,8 +22,7 @@ import ui.system
 #             closeEvent.accept()
 #         else:
 #             closeEvent.ignore()
-
-
+from __detection__ import DetectionDesigner
 from __login__ import LoginDesigner
 
 
@@ -38,22 +32,6 @@ def initUI(self):
     self.show()
 
 
-class child(QMainWindow, ui.pedestrian_detection_UI.Ui_MainWindow):
-
-    def __init__(self):
-        super(child, self).__init__()
-        self.setupUi(self)
-
-    def closeEvent(self, closeEvent):
-        print("关闭操作")
-        result = QMessageBox.question(None, "温馨提示", "您真的要退出吗？", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        if result == QMessageBox.Yes:
-            closeEvent.accept()
-        else:
-            closeEvent.ignore()
-
-    def Open(self):
-        self.show()
 
 
 if __name__ == '__main__':
@@ -65,9 +43,9 @@ if __name__ == '__main__':
 
     app = QtWidgets.QApplication(sys.argv)
     login_ui = LoginDesigner()
-    child = child()
+    detection_ui = DetectionDesigner()
     login_ui.show()
-    # login_ui.pushButton.clicked.connect(child.Open)
+    login_ui.login_success.connect(detection_ui.Open)
 
 
     # app = QApplication(sys.argv)
