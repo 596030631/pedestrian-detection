@@ -1,1 +1,9 @@
 ./.idea/
+/.idea/.gitignore
+/ui/temp/login.pkl
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/pedestrian-detection.iml
+/.idea/inspectionProfiles/profiles_settings.xml
+/users.pkl
+/.idea/vcs.xml
