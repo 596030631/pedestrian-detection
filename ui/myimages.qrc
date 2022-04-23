@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="pic">
+    <file>images/version.png</file>
+    <file>images/picselect.png</file>
+    <file>images/stop.png</file>
+    <file>images/help.png</file>
+    <file>images/author.png</file>
+    <file>images/setting.png</file>
+    <file>images/save.png</file>
+    <file>images/goon.png</file>
+    <file>images/start.png</file>
+    <file>images/background.png</file>
+    <file>images/video.png</file>
+    <file>images/camera.png</file>
+    <file>images/select.png</file>
+   <file>images/zong.png</file>
+    <file>images/file.png</file>
+    <file>images/camera01.png</file>
+    <file>images/min.png</file>
+    <file>images/close.png</file>
+    <file>images/square.png</file>
+    <file>images/tu01.png</file>
+  </qresource>
+</RCC>
