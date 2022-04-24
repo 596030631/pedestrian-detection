@@ -34,3 +34,8 @@ def userLogin(self, name, password):
 
 def registerSuccessful():
     print("注册成功")
+
+
+
+def userRegister():
+    print("用户注册")

@@ -24,6 +24,7 @@ from PyQt5.QtGui import QIcon
 #             closeEvent.ignore()
 from __detection__ import DetectionDesigner
 from __login__ import LoginDesigner
+from __register__ import RegisterDesigner
 
 
 def initUI(self):
@@ -44,8 +45,13 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     login_ui = LoginDesigner()
     detection_ui = DetectionDesigner()
-    login_ui.show()
+    register = RegisterDesigner()
+
     login_ui.login_success.connect(detection_ui.Open)
+    login_ui.buttonRegister.clicked.connect(register.show)
+
+
+    login_ui.show()
 
 
     # app = QApplication(sys.argv)

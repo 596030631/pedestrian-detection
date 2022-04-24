@@ -1,8 +1,9 @@
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QLineEdit
 
-from __RegisterQDialog__ import RegisterQDialog
+# from __RegisterQDialog__ import RegisterQDialog
 from __model__ import userLogin, registerSuccessful
+from __register__ import RegisterDesigner
 from __ui__ import Ui_systemClass
 
 
@@ -41,11 +42,11 @@ class LoginDesigner(QMainWindow, Ui_systemClass):
         self.password.textChanged.connect(self.checkUserPassword)
 
     # 注册按钮
-    def userRegister(self):
-        print("register")
-        register = RegisterQDialog()
-        register.successful_signal.connect(registerSuccessful)
-        register.exec()
+    # def userRegister(self):
+    #     print("register")
+    #     register = RegisterDesigner()
+    #     register.successful_signal.connect(registerSuccessful)
+    #     register.show()
 
     def userLogin(self):
         userLogin(self, self.user.text(), self.password.text())
@@ -53,7 +54,7 @@ class LoginDesigner(QMainWindow, Ui_systemClass):
     def button_init(self):
         self.buttonLogin.setEnabled(False)  # 先设置登录按钮为不可点击状态，当用户输入用户名及密码时才变为可点击状态
         self.buttonLogin.clicked.connect(self.userLogin)  # 登录按钮点击信号绑定槽函数
-        self.buttonRegister.clicked.connect(self.userRegister)  # 注册按钮点击信号绑定槽函数
+        # self.buttonRegister.clicked.connect(self.userRegister)  # 注册按钮点击信号绑定槽函数
 
     def LoginSuccessfulCallback(self):
         print("展示识别界面")
