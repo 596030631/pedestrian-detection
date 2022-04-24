@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 
-from ___video_holder__ import MyThread
+# from ___video_holder__ import MyThread
 from __detection_ui__ import Ui_MainWindow
 from detect import DetectThread
 
@@ -11,13 +11,14 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         super(DetectionDesigner, self).__init__()
         self.setupUi(self)
 
-        self.thread = MyThread()
-        # # 注册信号处理函数
-        self.thread.breakSignal.connect(self.display)
-        # # 启动线程
-        self.thread.start()
+        # self.thread = MyThread()
+        # # # 注册信号处理函数
+        # self.thread.breakSignal.connect(self.display)
+        # # # 启动线程
+        # self.thread.start()
 
         self.detectThread = DetectThread()
+        self.detectThread.sourceSignal.connect(self.display)
         self.detectThread.detectSignal.connect(self.displayDetect)
         self.detectThread.start()
 

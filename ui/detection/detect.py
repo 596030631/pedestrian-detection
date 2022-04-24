@@ -58,6 +58,7 @@ from PyQt5.QtGui import QPixmap, QImage
 
 class DetectThread(QThread):
     # 定义信号,定义参数为str类型
+    sourceSignal = pyqtSignal(QPixmap)
     detectSignal = pyqtSignal(QPixmap)
 
     def __init__(self, parent=None):
@@ -150,6 +151,7 @@ class DetectThread(QThread):
             t2 = time_sync()
             dt[0] += t2 - t1
 
+
             # Inference
             visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
             pred = model(im, augment=augment, visualize=visualize)
@@ -171,6 +173,12 @@ class DetectThread(QThread):
                     s += f'{i}: '
                 else:
                     p, im0, frame = path, im0s.copy(), getattr(dataset, 'frame', 0)
+
+                height, width, bytesPerComponent = im0.shape
+                bytesPerLine = bytesPerComponent * width
+                cv2.cvtColor(im0, cv2.COLOR_BGR2RGB, im0)
+                image = QImage(im0.data, width, height, bytesPerLine, QImage.Format_RGB888)
+                self.sourceSignal.emit(QPixmap.fromImage(image))
 
                 p = Path(p)  # to Path
                 save_path = str(save_dir / p.name)  # im.jpg
@@ -204,14 +212,14 @@ class DetectThread(QThread):
                             if save_crop:
                                 save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
+
                 # Stream results
                 im0 = annotator.result()
                 if True:
                     # cv2.imshow(str(p), im0)
-                    height, width, bytesPerComponent = im0.shape
-                    bytesPerLine = bytesPerComponent * width
+
                     # 变换彩色空间顺序
-                    cv2.cvtColor(im0, cv2.COLOR_BGR2RGB, im0)
+                    # cv2.cvtColor(im0, cv2.COLOR_BGR2RGB, im0)
                     image = QImage(im0.data, width, height, bytesPerLine, QImage.Format_RGB888)
                     self.detectSignal.emit(QPixmap.fromImage(image))
 
@@ -252,12 +260,14 @@ class DetectThread(QThread):
         parser = argparse.ArgumentParser()
         parser.add_argument('--weights', nargs='+', type=str, default=ROOT / './weights/yolov5n.pt',
                             help='model path(s)')
-        parser.add_argument('--source', type=str, default='rtsp://admin:123456@192.168.31.46:3389/stream0',
+        parser.add_argument('--source', type=str, default=0,
                             help='file/dir/URL/glob, 0 for webcam')
+        # parser.add_argument('--source', type=str, default='rtsp://admin:123456@192.168.31.46:3389/stream0',
+        #                     help='file/dir/URL/glob, 0 for webcam')
         parser.add_argument('--data', type=str, default=ROOT / 'data/coco128.yaml', help='(optional) dataset.yaml path')
         parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640],
                             help='inference size h,w')
-        parser.add_argument('--conf-thres', type=float, default=0.25, help='confidence threshold')
+        parser.add_argument('--conf-thres', type=float, default=0.35, help='confidence threshold')
         parser.add_argument('--iou-thres', type=float, default=0.45, help='NMS IoU threshold')
         parser.add_argument('--max-det', type=int, default=1000, help='maximum detections per image')
         parser.add_argument('--device', default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
