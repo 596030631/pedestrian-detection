@@ -51,7 +51,7 @@ if __name__ == '__main__':
     login_ui.buttonRegister.clicked.connect(register.show)
 
 
-    login_ui.show()
+    detection_ui.show()
 
 
     # app = QApplication(sys.argv)

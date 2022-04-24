@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 
-import pedestrian_detection_UI
+from __detection_ui__ import Ui_MainWindow
 
 
-class DetectionDesigner(QMainWindow, pedestrian_detection_UI.Ui_MainWindow):
+class DetectionDesigner(QMainWindow, Ui_MainWindow):
 
     def __init__(self):
         super(DetectionDesigner, self).__init__()

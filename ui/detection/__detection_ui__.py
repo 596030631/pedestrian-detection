@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'pedestrian_detection_UI.ui'
+# Form implementation generated from reading ui file '__detection_ui__.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,22 +14,22 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1665, 840)
-        MainWindow.setMinimumSize(QtCore.QSize(1665, 840))
+        MainWindow.resize(1750, 885)
+        MainWindow.setMinimumSize(QtCore.QSize(1750, 885))
         MainWindow.setMaximumSize(QtCore.QSize(1800, 900))
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/pic/images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("#MainWindow { \n"
-"    \n"
-"    border-image: url(:/pic/images/background.png);\n"
-"\n"
-"}\n"
-"QFrame{\n"
-"background:rgba(0,0,0,0.8);\n"
-"background:rgba(66, 195, 255, 0);\n"
-"}")
+                                 "    \n"
+                                 "    border-image: url(:/pic/images/background.png);\n"
+                                 "\n"
+                                 "}\n"
+                                 "QFrame{\n"
+                                 "background:rgba(0,0,0,0.8);\n"
+                                 "background:rgba(66, 195, 255, 0);\n"
+                                 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.toolButton_model = QtWidgets.QToolButton(self.centralwidget)
@@ -46,8 +46,9 @@ class Ui_MainWindow(object):
         self.textEdit_model = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_model.setGeometry(QtCore.QRect(130, 160, 261, 31))
         self.textEdit_model.setStyleSheet("background-color: transparent;\n"
-"border-color: rgb(0, 170, 255);\n"
-"color: rgb(0, 170, 255);")
+                                          "border-color: rgb(0, 170, 255);\n"
+                                          "color: rgb(0, 170, 255);")
+        self.textEdit_model.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
         self.textEdit_model.setObjectName("textEdit_model")
         self.toolButton_camera = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton_camera.setGeometry(QtCore.QRect(60, 290, 50, 50))
@@ -63,8 +64,9 @@ class Ui_MainWindow(object):
         self.textEdit_2 = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_2.setGeometry(QtCore.QRect(130, 300, 261, 31))
         self.textEdit_2.setStyleSheet("background-color: transparent;\n"
-"border-color: rgb(0, 170, 255);\n"
-"color: rgb(0, 170, 255);")
+                                      "border-color: rgb(0, 170, 255);\n"
+                                      "color: rgb(0, 170, 255);")
+        self.textEdit_2.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
         self.textEdit_2.setObjectName("textEdit_2")
         self.toolButton_file = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton_file.setGeometry(QtCore.QRect(60, 360, 50, 50))
@@ -79,8 +81,9 @@ class Ui_MainWindow(object):
         self.textEdit_file = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_file.setGeometry(QtCore.QRect(130, 370, 261, 31))
         self.textEdit_file.setStyleSheet("background-color: transparent;\n"
-"border-color: rgb(0, 170, 255);\n"
-"color: rgb(0, 170, 255);")
+                                         "border-color: rgb(0, 170, 255);\n"
+                                         "color: rgb(0, 170, 255);")
+        self.textEdit_file.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
         self.textEdit_file.setObjectName("textEdit_file")
         self.toolButton_video = QtWidgets.QToolButton(self.centralwidget)
         self.toolButton_video.setGeometry(QtCore.QRect(60, 430, 50, 50))
@@ -96,8 +99,9 @@ class Ui_MainWindow(object):
         self.textEdit_video = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_video.setGeometry(QtCore.QRect(130, 440, 261, 31))
         self.textEdit_video.setStyleSheet("background-color: transparent;\n"
-"border-color: rgb(0, 170, 255);\n"
-"color: rgb(0, 170, 255);")
+                                          "border-color: rgb(0, 170, 255);\n"
+                                          "color: rgb(0, 170, 255);")
+        self.textEdit_video.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
         self.textEdit_video.setObjectName("textEdit_video")
         self.label_title = QtWidgets.QLabel(self.centralwidget)
         self.label_title.setGeometry(QtCore.QRect(530, 20, 481, 51))
@@ -110,29 +114,29 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.label_title.setFont(font)
         self.label_title.setStyleSheet("\n"
-"\n"
-"font: 30pt \"楷体\";")
-        self.label_title.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+                                       "\n"
+                                       "font: 30pt \"楷体\";")
+        self.label_title.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
         self.label_title.setObjectName("label_title")
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(QtCore.QRect(70, 520, 121, 41))
+        self.pushButton_4.setGeometry(QtCore.QRect(40, 520, 121, 41))
         self.pushButton_4.setStyleSheet("QPushButton{\n"
-"background:#03a9f4;\n"
-"color:#fff;\n"
-"border-radius:15px;\n"
-"}")
+                                        "background:#03a9f4;\n"
+                                        "color:#fff;\n"
+                                        "border-radius:15px;\n"
+                                        "}")
         self.pushButton_4.setObjectName("pushButton_4")
         self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_5.setGeometry(QtCore.QRect(270, 520, 121, 41))
+        self.pushButton_5.setGeometry(QtCore.QRect(340, 520, 121, 41))
         self.pushButton_5.setStyleSheet("QPushButton{\n"
-"background:#03a9f4;\n"
-"color:#fff;\n"
-"border-radius:15px;\n"
-"}")
+                                        "background:#03a9f4;\n"
+                                        "color:#fff;\n"
+                                        "border-radius:15px;\n"
+                                        "}")
         self.pushButton_5.setObjectName("pushButton_5")
         self.splitter = QtWidgets.QSplitter(self.centralwidget)
         self.splitter.setEnabled(True)
-        self.splitter.setGeometry(QtCore.QRect(510, 150, 1049, 561))
+        self.splitter.setGeometry(QtCore.QRect(510, 140, 1151, 631))
         self.splitter.setStyleSheet("#splitter::handle{background: 1px solid  rgba(200, 200, 200,100);}")
         self.splitter.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.splitter.setLineWidth(10)
@@ -153,7 +157,7 @@ class Ui_MainWindow(object):
         self.raw_video.setFont(font)
         self.raw_video.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.raw_video.setStyleSheet("\n"
-"background-color: rgb(0,0,0,0.8);")
+                                     "background-color: rgb(0,0,0,0.8);")
         self.raw_video.setText("")
         self.raw_video.setScaledContents(False)
         self.raw_video.setAlignment(QtCore.Qt.AlignCenter)
@@ -177,7 +181,7 @@ class Ui_MainWindow(object):
         self.out_video_2.setAlignment(QtCore.Qt.AlignCenter)
         self.out_video_2.setObjectName("out_video_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(1030, 90, 181, 51))
+        self.label_3.setGeometry(QtCore.QRect(1090, 90, 181, 51))
         self.label_3.setStyleSheet("font: 14pt \"黑体\";")
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
@@ -198,11 +202,12 @@ class Ui_MainWindow(object):
         self.textEdit_model_2 = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_model_2.setGeometry(QtCore.QRect(130, 230, 261, 31))
         self.textEdit_model_2.setStyleSheet("background-color: transparent;\n"
-"border-color: rgb(0, 170, 255);\n"
-"color: rgb(0, 170, 255);")
+                                            "border-color: rgb(0, 170, 255);\n"
+                                            "color: rgb(0, 170, 255);")
+        self.textEdit_model_2.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
         self.textEdit_model_2.setObjectName("textEdit_model_2")
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(550, 730, 971, 42))
+        self.layoutWidget.setGeometry(QtCore.QRect(590, 800, 971, 42))
         self.layoutWidget.setObjectName("layoutWidget")
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
@@ -210,17 +215,17 @@ class Ui_MainWindow(object):
         self.runButton = QtWidgets.QPushButton(self.layoutWidget)
         self.runButton.setMinimumSize(QtCore.QSize(40, 40))
         self.runButton.setStyleSheet("QPushButton {\n"
-"border-style: solid;\n"
-"border-width: 0px;\n"
-"border-radius: 0px;\n"
-"background-color: rgba(223, 223, 223, 0);\n"
-"}\n"
-"QPushButton::focus{outline: none;}\n"
-"QPushButton::hover {\n"
-"border-style: solid;\n"
-"border-width: 0px;\n"
-"border-radius: 0px;\n"
-"background-color: rgba(223, 223, 223, 150);}")
+                                     "border-style: solid;\n"
+                                     "border-width: 0px;\n"
+                                     "border-radius: 0px;\n"
+                                     "background-color: rgba(223, 223, 223, 0);\n"
+                                     "}\n"
+                                     "QPushButton::focus{outline: none;}\n"
+                                     "QPushButton::hover {\n"
+                                     "border-style: solid;\n"
+                                     "border-width: 0px;\n"
+                                     "border-radius: 0px;\n"
+                                     "background-color: rgba(223, 223, 223, 150);}")
         self.runButton.setText("")
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/pic/images/start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -238,8 +243,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.addWidget(self.runButton)
         self.progressBar = QtWidgets.QProgressBar(self.layoutWidget)
         self.progressBar.setMaximumSize(QtCore.QSize(16777215, 5))
-        self.progressBar.setStyleSheet("QProgressBar{ color: rgb(255, 255, 255); font:12pt; border-radius:2px; text-align:center; border:none; background-color: rgba(215, 215, 215,100);} \n"
-"QProgressBar:chunk{ border-radius:0px; background: rgba(55, 55, 55, 200);}")
+        self.progressBar.setStyleSheet(
+            "QProgressBar{ color: rgb(255, 255, 255); font:12pt; border-radius:2px; text-align:center; border:none; background-color: rgba(215, 215, 215,100);} \n"
+            "QProgressBar:chunk{ border-radius:0px; background: rgba(55, 55, 55, 200);}")
         self.progressBar.setMaximum(1000)
         self.progressBar.setProperty("value", 0)
         self.progressBar.setTextVisible(False)
@@ -248,17 +254,17 @@ class Ui_MainWindow(object):
         self.stopButton = QtWidgets.QPushButton(self.layoutWidget)
         self.stopButton.setMinimumSize(QtCore.QSize(40, 40))
         self.stopButton.setStyleSheet("QPushButton {\n"
-"border-style: solid;\n"
-"border-width: 0px;\n"
-"border-radius: 0px;\n"
-"background-color: rgba(223, 223, 223, 0);\n"
-"}\n"
-"QPushButton::focus{outline: none;}\n"
-"QPushButton::hover {\n"
-"border-style: solid;\n"
-"border-width: 0px;\n"
-"border-radius: 0px;\n"
-"background-color: rgba(223, 223, 223, 150);}")
+                                      "border-style: solid;\n"
+                                      "border-width: 0px;\n"
+                                      "border-radius: 0px;\n"
+                                      "background-color: rgba(223, 223, 223, 0);\n"
+                                      "}\n"
+                                      "QPushButton::focus{outline: none;}\n"
+                                      "QPushButton::hover {\n"
+                                      "border-style: solid;\n"
+                                      "border-width: 0px;\n"
+                                      "border-radius: 0px;\n"
+                                      "background-color: rgba(223, 223, 223, 150);}")
         self.stopButton.setText("")
         icon7 = QtGui.QIcon()
         icon7.addPixmap(QtGui.QPixmap(":/pic/images/stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -267,60 +273,83 @@ class Ui_MainWindow(object):
         self.stopButton.setObjectName("stopButton")
         self.horizontalLayout_12.addWidget(self.stopButton)
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
-        self.frame_2.setGeometry(QtCore.QRect(-10, 590, 221, 201))
-        self.frame_2.setStyleSheet("\n"
-"")
+        self.frame_2.setGeometry(QtCore.QRect(-10, 600, 221, 251))
+        self.frame_2.setStyleSheet("")
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
         self.pushButton_3 = QtWidgets.QPushButton(self.frame_2)
         self.pushButton_3.setGeometry(QtCore.QRect(60, 10, 121, 41))
         self.pushButton_3.setStyleSheet("QPushButton{\n"
-"background:#03a9f4;\n"
-"color:#fff;\n"
-"border-radius:15px;\n"
-"}")
+                                        "background:#03a9f4;\n"
+                                        "color:#fff;\n"
+                                        "border-radius:15px;\n"
+                                        "}")
         self.pushButton_3.setObjectName("pushButton_3")
-        self.lcdNumber = QtWidgets.QLCDNumber(self.frame_2)
-        self.lcdNumber.setGeometry(QtCore.QRect(110, 70, 61, 41))
-        self.lcdNumber.setObjectName("lcdNumber")
-        self.label_6 = QtWidgets.QLabel(self.frame_2)
-        self.label_6.setGeometry(QtCore.QRect(30, 70, 71, 51))
+        self.formLayoutWidget = QtWidgets.QWidget(self.frame_2)
+        self.formLayoutWidget.setGeometry(QtCore.QRect(30, 80, 181, 161))
+        self.formLayoutWidget.setObjectName("formLayoutWidget")
+        self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
+        self.formLayout.setContentsMargins(0, 0, 0, 0)
+        self.formLayout.setObjectName("formLayout")
+        self.label_6 = QtWidgets.QLabel(self.formLayoutWidget)
         self.label_6.setObjectName("label_6")
-        self.label_7 = QtWidgets.QLabel(self.frame_2)
-        self.label_7.setGeometry(QtCore.QRect(30, 140, 81, 31))
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_6)
+        self.label_7 = QtWidgets.QLabel(self.formLayoutWidget)
         self.label_7.setObjectName("label_7")
-        self.lcdNumber_2 = QtWidgets.QLCDNumber(self.frame_2)
-        self.lcdNumber_2.setGeometry(QtCore.QRect(110, 130, 61, 41))
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_7)
+        self.lcdNumber_2 = QtWidgets.QLCDNumber(self.formLayoutWidget)
         self.lcdNumber_2.setObjectName("lcdNumber_2")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lcdNumber_2)
+        self.label_8 = QtWidgets.QLabel(self.formLayoutWidget)
+        self.label_8.setObjectName("label_8")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_8)
+        self.lcdNumber_3 = QtWidgets.QLCDNumber(self.formLayoutWidget)
+        self.lcdNumber_3.setObjectName("lcdNumber_3")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.lcdNumber_3)
+        self.label_9 = QtWidgets.QLabel(self.formLayoutWidget)
+        self.label_9.setObjectName("label_9")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_9)
+        self.lcdNumber_4 = QtWidgets.QLCDNumber(self.formLayoutWidget)
+        self.lcdNumber_4.setObjectName("lcdNumber_4")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.lcdNumber_4)
+        self.lcdNumber = QtWidgets.QLCDNumber(self.formLayoutWidget)
+        self.lcdNumber.setObjectName("lcdNumber")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.lcdNumber)
+        self.label_10 = QtWidgets.QLabel(self.formLayoutWidget)
+        self.label_10.setObjectName("label_10")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_10)
+        self.lcdNumber_5 = QtWidgets.QLCDNumber(self.formLayoutWidget)
+        self.lcdNumber_5.setObjectName("lcdNumber_5")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.lcdNumber_5)
         self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(210, 590, 271, 201))
+        self.frame.setGeometry(QtCore.QRect(210, 600, 271, 241))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.label_class = QtWidgets.QLabel(self.frame)
-        self.label_class.setGeometry(QtCore.QRect(30, 80, 86, 31))
+        self.label_class.setGeometry(QtCore.QRect(20, 140, 86, 31))
         font = QtGui.QFont()
         font.setFamily("华文仿宋")
         font.setPointSize(18)
         self.label_class.setFont(font)
         self.label_class.setObjectName("label_class")
         self.label_conf = QtWidgets.QLabel(self.frame)
-        self.label_conf.setGeometry(QtCore.QRect(30, 140, 111, 31))
+        self.label_conf.setGeometry(QtCore.QRect(20, 190, 111, 31))
         font = QtGui.QFont()
         font.setFamily("华文仿宋")
         font.setPointSize(18)
         self.label_conf.setFont(font)
         self.label_conf.setObjectName("label_conf")
         self.label_class_result = QtWidgets.QLabel(self.frame)
-        self.label_class_result.setGeometry(QtCore.QRect(100, 70, 171, 29))
+        self.label_class_result.setGeometry(QtCore.QRect(80, 130, 171, 29))
         font = QtGui.QFont()
         font.setPointSize(18)
         self.label_class_result.setFont(font)
         self.label_class_result.setStyleSheet("color:rgb(0, 170, 255)")
         self.label_class_result.setObjectName("label_class_result")
         self.label_score_result = QtWidgets.QLabel(self.frame)
-        self.label_score_result.setGeometry(QtCore.QRect(100, 130, 61, 31))
+        self.label_score_result.setGeometry(QtCore.QRect(100, 180, 61, 31))
         font = QtGui.QFont()
         font.setPointSize(18)
         self.label_score_result.setFont(font)
@@ -337,8 +366,8 @@ class Ui_MainWindow(object):
         self.comboBox_select.setFont(font)
         self.comboBox_select.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.comboBox_select.setStyleSheet("color: rgb(43, 89, 124);\n"
-"\n"
-"font: 12pt \"楷体\";")
+                                           "\n"
+                                           "font: 12pt \"楷体\";")
         self.comboBox_select.setIconSize(QtCore.QSize(36, 36))
         self.comboBox_select.setObjectName("comboBox_select")
         self.comboBox_select.addItem("")
@@ -347,6 +376,28 @@ class Ui_MainWindow(object):
         self.label_picSelect.setStyleSheet("border-image: url(:/pic/images/picselect.png)")
         self.label_picSelect.setText("")
         self.label_picSelect.setObjectName("label_picSelect")
+        self.label_objNum = QtWidgets.QLabel(self.frame)
+        self.label_objNum.setGeometry(QtCore.QRect(20, 80, 131, 31))
+        font = QtGui.QFont()
+        font.setFamily("华文仿宋")
+        font.setPointSize(18)
+        self.label_objNum.setFont(font)
+        self.label_objNum.setObjectName("label_objNum")
+        self.label_numer_result = QtWidgets.QLabel(self.frame)
+        self.label_numer_result.setGeometry(QtCore.QRect(120, 80, 61, 31))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.label_numer_result.setFont(font)
+        self.label_numer_result.setStyleSheet("color: rgb(0, 170, 255);")
+        self.label_numer_result.setObjectName("label_numer_result")
+        self.pushButton_6 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_6.setGeometry(QtCore.QRect(190, 520, 121, 41))
+        self.pushButton_6.setStyleSheet("QPushButton{\n"
+                                        "background:#03a9f4;\n"
+                                        "color:#fff;\n"
+                                        "border-radius:15px;\n"
+                                        "}")
+        self.pushButton_6.setObjectName("pushButton_6")
         self.toolButton_model.raise_()
         self.textEdit_model.raise_()
         self.toolButton_camera.raise_()
@@ -366,6 +417,7 @@ class Ui_MainWindow(object):
         self.label_title.raise_()
         self.frame_2.raise_()
         self.frame.raise_()
+        self.pushButton_6.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -418,33 +470,39 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "pedestrian_detection"))
         self.toolButton_model.setToolTip(_translate("MainWindow", "<html><head/><body><p>选择模型</p></body></html>"))
         self.toolButton_model.setText(_translate("MainWindow", "..."))
-        self.textEdit_model.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">模型选择</span></p></body></html>"))
+        self.textEdit_model.setHtml(_translate("MainWindow",
+                                               "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                               "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                               "p, li { white-space: pre-wrap; }\n"
+                                               "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">模型选择</span></p></body></html>"))
         self.toolButton_camera.setToolTip(_translate("MainWindow", "<html><head/><body><p>调用实时摄像头</p></body></html>"))
         self.toolButton_camera.setText(_translate("MainWindow", "..."))
-        self.textEdit_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">实时摄像头</span></p></body></html>"))
+        self.textEdit_2.setMarkdown(_translate("MainWindow", "实时摄像头关闭\n"
+                                                             "\n"
+                                                             ""))
+        self.textEdit_2.setHtml(_translate("MainWindow",
+                                           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                           "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                           "p, li { white-space: pre-wrap; }\n"
+                                           "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">实时摄像头关闭</span></p></body></html>"))
         self.toolButton_file.setToolTip(_translate("MainWindow", "<html><head/><body><p>选择检测图片</p></body></html>"))
         self.toolButton_file.setText(_translate("MainWindow", "..."))
-        self.textEdit_file.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">选择检测图片</span></p></body></html>"))
+        self.textEdit_file.setHtml(_translate("MainWindow",
+                                              "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                              "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                              "p, li { white-space: pre-wrap; }\n"
+                                              "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                              "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">选择检测图片</span></p></body></html>"))
         self.toolButton_video.setToolTip(_translate("MainWindow", "<html><head/><body><p>选择检测视频</p></body></html>"))
         self.toolButton_video.setText(_translate("MainWindow", "..."))
-        self.textEdit_video.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">选择检测视频</span></p></body></html>"))
-        self.label_title.setToolTip(_translate("MainWindow", "<html><head/><body><p>version: v1.0</p><p>author: 思绪无限</p></body></html>"))
+        self.textEdit_video.setHtml(_translate("MainWindow",
+                                               "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                               "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                               "p, li { white-space: pre-wrap; }\n"
+                                               "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">选择检测视频</span></p></body></html>"))
         self.label_title.setText(_translate("MainWindow", "行人检测与追踪系统"))
         self.pushButton_4.setText(_translate("MainWindow", "开始检测"))
         self.pushButton_5.setText(_translate("MainWindow", "停止检测"))
@@ -452,20 +510,35 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "检测文件"))
         self.toolButton_model_2.setToolTip(_translate("MainWindow", "<html><head/><body><p>选择视频接口</p></body></html>"))
         self.toolButton_model_2.setText(_translate("MainWindow", "..."))
-        self.textEdit_model_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">选择视频接口</span></p></body></html>"))
+        self.textEdit_model_2.setHtml(_translate("MainWindow",
+                                                 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                                 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                                 "p, li { white-space: pre-wrap; }\n"
+                                                 "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                                 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">选择视频接口</span></p></body></html>"))
         self.pushButton_3.setText(_translate("MainWindow", "类别数统计"))
-        self.label_6.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">行人数：</span></p></body></html>"))
-        self.label_7.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">车辆数：</span></p></body></html>"))
-        self.label_class.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">类别：<br/></span></p></body></html>"))
-        self.label_conf.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">置信度：<br/></span></p></body></html>"))
+        self.label_6.setText(_translate("MainWindow",
+                                        "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">car</span></p></body></html>"))
+        self.label_7.setText(_translate("MainWindow",
+                                        "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">pedestrian</span></p></body></html>"))
+        self.label_8.setText(_translate("MainWindow",
+                                        "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">truck</span></p></body></html>"))
+        self.label_9.setText(_translate("MainWindow",
+                                        "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">bus</span></p></body></html>"))
+        self.label_10.setText(_translate("MainWindow",
+                                         "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">rider</span></p></body></html>"))
+        self.label_class.setText(_translate("MainWindow",
+                                            "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">类别：<br/></span></p></body></html>"))
+        self.label_conf.setText(_translate("MainWindow",
+                                           "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">置信度：<br/></span></p></body></html>"))
         self.label_class_result.setText(_translate("MainWindow", "None"))
         self.label_score_result.setText(_translate("MainWindow", "0"))
         self.comboBox_select.setCurrentText(_translate("MainWindow", "所有目标"))
         self.comboBox_select.setItemText(0, _translate("MainWindow", "所有目标"))
+        self.label_objNum.setText(_translate("MainWindow",
+                                             "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">目标数目：</span><br/></p></body></html>"))
+        self.label_numer_result.setText(_translate("MainWindow", "0"))
+        self.pushButton_6.setText(_translate("MainWindow", "目标跟踪"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
         self.actionsave.setText(_translate("MainWindow", "save"))
         self.actionsave.setToolTip(_translate("MainWindow", "保存"))
@@ -482,6 +555,6 @@ class Ui_MainWindow(object):
         self.actionhelp.setText(_translate("MainWindow", "help"))
         self.actionhelp.setToolTip(_translate("MainWindow", "帮助文档"))
         self.actionhelp.setShortcut(_translate("MainWindow", "F2"))
-from MouseLabel import Label_click_Mouse
 
-from ui import myimages_rc
+
+from MouseLabel import Label_click_Mouse
