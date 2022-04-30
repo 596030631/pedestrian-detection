@@ -60,6 +60,10 @@ class DetectThread(QThread):
     # 定义信号,定义参数为str类型
     sourceSignal = pyqtSignal(QPixmap)
     detectSignal = pyqtSignal(QPixmap)
+    running = True
+
+    def changeModel(self):
+        print("changeModel")
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -67,12 +71,14 @@ class DetectThread(QThread):
         self.mutex = QtCore.QMutex()
 
     def run(self):
+        self.running = True
         with QtCore.QMutexLocker(self.mutex):
             self.stoped = False
         opt = self.parse_opt()
         self.main(opt)
 
     def stop(self):
+        self.running = False
         with QtCore.QMutexLocker(self.mutex):
             self.stoped = True
 
@@ -151,7 +157,6 @@ class DetectThread(QThread):
             t2 = time_sync()
             dt[0] += t2 - t1
 
-
             # Inference
             visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
             pred = model(im, augment=augment, visualize=visualize)
@@ -173,7 +178,6 @@ class DetectThread(QThread):
                     s += f'{i}: '
                 else:
                     p, im0, frame = path, im0s.copy(), getattr(dataset, 'frame', 0)
-
                 height, width, bytesPerComponent = im0.shape
                 bytesPerLine = bytesPerComponent * width
                 cv2.cvtColor(im0, cv2.COLOR_BGR2RGB, im0)
@@ -212,7 +216,6 @@ class DetectThread(QThread):
                             if save_crop:
                                 save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
-
                 # Stream results
                 im0 = annotator.result()
                 if True:
@@ -222,6 +225,9 @@ class DetectThread(QThread):
                     # cv2.cvtColor(im0, cv2.COLOR_BGR2RGB, im0)
                     image = QImage(im0.data, width, height, bytesPerLine, QImage.Format_RGB888)
                     self.detectSignal.emit(QPixmap.fromImage(image))
+
+                    if not self.running:
+                        dataset.stop_cv()
 
                     # cv2.waitKey(1)  # 1 millisecond
 
@@ -255,6 +261,7 @@ class DetectThread(QThread):
             LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
         if update:
             strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
+
 
     def parse_opt(self):
         parser = argparse.ArgumentParser()
