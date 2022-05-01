@@ -706,7 +706,7 @@ border-radius:15px;
        <widget class="QLCDNumber" name="lcdNumber_4"/>
       </item>
       <item row="0" column="1">
-       <widget class="QLCDNumber" name="lcdNumber"/>
+       <widget class="QLCDNumber" name="lcdNumber_1"/>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_10">
@@ -934,7 +934,7 @@ font: 12pt &quot;楷体&quot;;</string>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="buttonChooseVideo">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -977,7 +977,7 @@ font: 12pt &quot;楷体&quot;;</string>
    <zorder>frame</zorder>
    <zorder>comboBoxModel</zorder>
    <zorder>comboBoxCameraIP</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>buttonChooseVideo</zorder>
    <zorder>buttonImage</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

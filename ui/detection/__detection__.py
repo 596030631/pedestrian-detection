@@ -1,10 +1,15 @@
-from PyQt5.QtWidgets import QMainWindow, QMessageBox
+import os
+
+import cv2
+from PyQt5.QtGui import QPixmap, QImage
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QFileDialog
 
 from __detection_ui__ import Ui_MainWindow
 from detect import DetectThread
 
 list_model = ['yolov5n.pt', 'yolov5s.pt']
 list_camera_ip = ['yolov5n.pt', 'yolov5s.pt']
+
 
 class DetectionDesigner(QMainWindow, Ui_MainWindow):
     currentSelectModelName = list_model[0]
@@ -30,30 +35,58 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.comboBoxCameraIP.addItem('192.168.1.12')
         self.buttonStart.clicked.connect(self.Start)
         self.buttonStop.clicked.connect(self.Stop)
+        self.buttonImage.clicked.connect(self.chooseImage)
+        self.buttonChooseVideo.clicked.connect(self.chooseVideo)
 
     def Start(self):
         print('start')
-        self.detectThread = DetectThread()
+        rtspUrl = 'rtsp://admin:123456@192.168.31.46:3389/stream0'
+        self.detectThread = DetectThread(p_source=rtspUrl)
+        self.detectThread.sourceSignal.connect(self.display)
+        self.detectThread.detectSignal.connect(self.displayDetect)
+        self.detectThread.start()
+
+    def Stop(self):
+        print('stop')
+        self.detectThread.stop()
+
+    def chooseImage(self):
+        print('chooseImage')
+        filename = QFileDialog.getOpenFileNames(self, '选择图像', os.getcwd(), "All Files(*.jpg))")
+        print(filename)
+        img_path = filename[0][0]
+        print(img_path)
+        img = cv2.imread(img_path)
+        print(img)
+        # height, width, bytesPerComponent = img.shape
+        # bytesPerLine = bytesPerComponent * width
+        # cv2.cvtColor(img, cv2.COLOR_BGR2RGB, img)
+        # img = QImage(img.data, width, height, bytesPerLine, QImage.Format_RGB888)
+        # self.raw_video.setPixmap(QPixmap.fromImage(img))
+
+        self.detectThread = DetectThread(p_source=img_path)
         self.detectThread.sourceSignal.connect(self.display)
         self.detectThread.detectSignal.connect(self.displayDetect)
         self.detectThread.start()
 
 
-    def Stop(self):
-        print('stop')
-        self.detectThread.stop()
+    def chooseVideo(self):
+        print('chooseVideo')
+        filename = QFileDialog.getOpenFileNames(self, '选择视频', os.getcwd(), "All Files(*.mp4)")
+        print(filename)
+        video_path = filename[0][0]
+        self.detectThread = DetectThread(p_source=video_path)
+        self.detectThread.sourceSignal.connect(self.display)
+        self.detectThread.detectSignal.connect(self.displayDetect)
+        self.detectThread.start()
 
     def activated(self):
         print("activated")
         sender = self.sender()
         print(sender.currentText())
 
-
     def comboBoxModelActivated(self, lb):
         print('comboBoxModelActivated:' + lb)
-
-
-
 
     def closeEvent(self, closeEvent):
         print("关闭操作")
@@ -62,7 +95,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
             closeEvent.accept()
         else:
             closeEvent.ignore()
-            
+
     def Open(self):
         print("open")
         self.show()

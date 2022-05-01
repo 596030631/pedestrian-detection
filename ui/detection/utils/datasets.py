@@ -176,6 +176,7 @@ class _RepeatSampler:
 
 
 class LoadImages:
+    cv_running = True
     # YOLOv5 image/video dataloader, i.e. `python detect.py --source image.jpg/vid.mp4`
     def __init__(self, path, img_size=640, stride=32, auto=True):
         p = str(Path(path).resolve())  # os-agnostic absolute path
@@ -209,6 +210,9 @@ class LoadImages:
     def __iter__(self):
         self.count = 0
         return self
+
+    def stop_cv(self):
+        self.cv_running = False
 
     def __next__(self):
         if self.count == self.nf:
@@ -361,7 +365,9 @@ class LoadStreams:
                     self.imgs[i] = np.zeros_like(self.imgs[i])
                     cap.open(stream)  # re-open stream if signal was lost
             time.sleep(1 / self.fps[i])  # wait time
+            print("--------")
 
+        print("ssssssssssssssssss")
     def __iter__(self):
         self.count = -1
         return self
