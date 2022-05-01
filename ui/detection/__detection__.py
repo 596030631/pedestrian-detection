@@ -1,7 +1,6 @@
 import os
 
 import cv2
-from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QFileDialog
 
 from __detection_ui__ import Ui_MainWindow
@@ -13,6 +12,7 @@ list_camera_ip = ['yolov5n.pt', 'yolov5s.pt']
 
 class DetectionDesigner(QMainWindow, Ui_MainWindow):
     currentSelectModelName = list_model[0]
+    running = False
 
     def __init__(self):
         super(DetectionDesigner, self).__init__()
@@ -37,18 +37,43 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.buttonStop.clicked.connect(self.Stop)
         self.buttonImage.clicked.connect(self.chooseImage)
         self.buttonChooseVideo.clicked.connect(self.chooseVideo)
+        self.buttonLocalCamera.clicked.connect(self.buttonOpenLocalCamera)
+
+    def buttonOpenLocalCamera(self):
+        print('buttonOpenCamera')
+        try:
+            if self.running:
+                self.running = False
+                self.buttonLocalCamera.setText("本地摄像头关闭")
+                self.detectThread.stop()
+            else:
+                self.running = True
+                self.buttonLocalCamera.setText("本地摄像头开启")
+                self.detectThread = DetectThread(p_source='0')
+                self.detectThread.sourceSignal.connect(self.display)
+                self.detectThread.detectSignal.connect(self.displayDetect)
+                self.detectThread.start()
+        except:
+            print()
 
     def Start(self):
         print('start')
-        rtspUrl = 'rtsp://admin:123456@192.168.31.46:3389/stream0'
-        self.detectThread = DetectThread(p_source=rtspUrl)
-        self.detectThread.sourceSignal.connect(self.display)
-        self.detectThread.detectSignal.connect(self.displayDetect)
-        self.detectThread.start()
+        if self.running:
+            self.running = False
+            self.detectThread.stop()
+        else:
+            self.running = True
+            rtspUrl = 'rtsp://admin:123456@192.168.31.46:3389/stream0'
+            self.detectThread = DetectThread(p_source=rtspUrl)
+            self.detectThread.sourceSignal.connect(self.display)
+            self.detectThread.detectSignal.connect(self.displayDetect)
+            self.detectThread.start()
 
     def Stop(self):
         print('stop')
-        self.detectThread.stop()
+        if self.running:
+            self.running = False
+            self.detectThread.stop()
 
     def chooseImage(self):
         print('chooseImage')
@@ -64,21 +89,31 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         # img = QImage(img.data, width, height, bytesPerLine, QImage.Format_RGB888)
         # self.raw_video.setPixmap(QPixmap.fromImage(img))
 
-        self.detectThread = DetectThread(p_source=img_path)
-        self.detectThread.sourceSignal.connect(self.display)
-        self.detectThread.detectSignal.connect(self.displayDetect)
-        self.detectThread.start()
-
+        if self.running:
+            self.running = False
+            self.detectThread.stop()
+        else:
+            self.running = True
+            self.detectThread = DetectThread(p_source=img_path)
+            self.detectThread.sourceSignal.connect(self.display)
+            self.detectThread.detectSignal.connect(self.displayDetect)
+            self.detectThread.start()
 
     def chooseVideo(self):
         print('chooseVideo')
         filename = QFileDialog.getOpenFileNames(self, '选择视频', os.getcwd(), "All Files(*.mp4)")
         print(filename)
         video_path = filename[0][0]
-        self.detectThread = DetectThread(p_source=video_path)
-        self.detectThread.sourceSignal.connect(self.display)
-        self.detectThread.detectSignal.connect(self.displayDetect)
-        self.detectThread.start()
+
+        if self.running:
+            self.running = False
+            self.detectThread.stop()
+        else:
+            self.running = True
+            self.detectThread = DetectThread(p_source=video_path)
+            self.detectThread.sourceSignal.connect(self.display)
+            self.detectThread.detectSignal.connect(self.displayDetect)
+            self.detectThread.start()
 
     def activated(self):
         print("activated")
