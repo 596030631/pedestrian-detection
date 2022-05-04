@@ -140,16 +140,10 @@ class DetectThread(QThread):
             cudnn.benchmark = True  # set True to speed up constant image size inference
             dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=pt)
             bs = len(dataset)  # batch_size
-            print("bbbbbbbbbbbbbb")
-
         else:
             dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)
-            print("aaaaaaaaaaaaaaa")
             bs = 1  # batch_size
-
-
         vid_path, vid_writer = [None] * bs, [None] * bs
-
         # Run inference
         model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
         dt, seen = [0.0, 0.0, 0.0], 0
@@ -225,24 +219,11 @@ class DetectThread(QThread):
                 # Stream results
                 im0 = annotator.result()
                 if True:
-                    # cv2.imshow(str(p), im0)
-
-                    # 变换彩色空间顺序
-                    # cv2.cvtColor(im0, cv2.COLOR_BGR2RGB, im0)
-                    print("cccccccccccccc")
-
                     image = QImage(im0.data, width, height, bytesPerLine, QImage.Format_RGB888)
                     self.detectSignal.emit(QPixmap.fromImage(image))
-                    print("hhhhhhhhh")
-
                     if not self.running:
-                        print("ddddddddddddd")
                         dataset.stop_cv()
-                        print("jjjjjjjjjj")
-
                         return
-
-
                     cv2.waitKey(1)  # 1 millisecond
 
                 # Save results (image with detections)

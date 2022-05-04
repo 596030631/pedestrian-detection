@@ -52,7 +52,7 @@ if __name__ == '__main__':
     login_ui.buttonRegister.clicked.connect(register.show)
 
 
-    detection_ui.show()
+    login_ui.show()
 
 
 

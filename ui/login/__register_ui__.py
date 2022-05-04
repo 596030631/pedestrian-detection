@@ -118,4 +118,3 @@ class Ui_Register(object):
         self.buttonRegister.setText(_translate("Register", "注  册"))
         self.buttonCLear.setText(_translate("Register", "重  填"))
         self.buttonExit.setText(_translate("Register", "取  消"))
-import myimages_rc

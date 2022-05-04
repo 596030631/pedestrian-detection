@@ -4,7 +4,6 @@ from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QMainWindow, QLineEdit, QMessageBox
 
-from __model__ import userRegister
 from __register_ui__ import Ui_Register
 
 
@@ -31,7 +30,7 @@ class RegisterDesigner(QMainWindow, Ui_Register):
     def pushbutton_init(self):
         # 设置注册按钮为不可点击状态，绑定槽函数
         self.buttonRegister.setEnabled(False)
-        self.buttonRegister.clicked.connect(userRegister)
+        self.buttonRegister.clicked.connect(self.register_func)
         # 取消按钮绑定取消注册槽函数
         # self.buttonExit.clicked.connect(self.cancel_func)
 
@@ -96,7 +95,7 @@ class RegisterDesigner(QMainWindow, Ui_Register):
     # 用户注册方法
     def register_func(self):
         # 先获取注册用户ID，检查用户ID是否存在
-        ID = self.name_line.text()
+        ID = self.userId.text()
         try:
             with open('users.pkl', 'rb') as f1:
                 users = pickle.load(f1)
@@ -108,21 +107,21 @@ class RegisterDesigner(QMainWindow, Ui_Register):
             QMessageBox.information(None, '提示', '该用户ID已被注册！')
         # 否则收集用户注册信息
         else:
-            gender = self.gender_data()
-            user_data = [self.password1_line.text(),
-                         self.nick_line.text(),
-                         gender]
+            user_data = [self.password.text(),
+                         self.passwordAgain.text()]
             # 写入用户信息字典
             users[ID] = user_data
             with open('users.pkl', 'wb') as f2:
                 pickle.dump(users, f2)
             # 提醒用户注册成功，询问是否登录
+            print("2222")
+
             choice = QMessageBox.information(None, '提示', '注册成功，是否登录？',
                                              QMessageBox.Yes | QMessageBox.No)
             # 如选择是，关闭注册页面，并在登录页面用户ID显示注册ID,密码
             if choice == QMessageBox.Yes:
-                self.successful_signal.emit([self.name_line.text(),
-                                             self.password1_line.text()])
+                # self.successful_signal.emit([self.userId.text(),
+                #                              self.password.text()])
                 self.close()
             # 如选择否，直接关闭注册页面。
             else:

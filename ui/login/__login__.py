@@ -2,7 +2,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QLineEdit
 
 # from __RegisterQDialog__ import RegisterQDialog
-from __model__ import userLogin, registerSuccessful
+from __model__ import userLogin
 from __register__ import RegisterDesigner
 from __ui__ import Ui_systemClass
 

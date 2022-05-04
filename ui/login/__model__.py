@@ -32,10 +32,10 @@ def userLogin(self, name, password):
         print("用户不存在")
 
 
-def registerSuccessful():
-    print("注册成功")
-
-
-
-def userRegister():
-    print("用户注册")
+# def registerSuccessful():
+#     print("注册成功")
+#
+#
+#
+# def userRegister():
+#     print("用户注册")
