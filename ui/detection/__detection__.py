@@ -52,9 +52,21 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
                 self.detectThread = DetectThread(p_source='0')
                 self.detectThread.sourceSignal.connect(self.display)
                 self.detectThread.detectSignal.connect(self.displayDetect)
+                self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
                 self.detectThread.start()
         except:
             print()
+
+
+    def displayobjectLcdNumber(self, number_array):
+        print("displayObjectLcdLabel")
+        print(number_array)
+        self.lcdNumber_1.display(number_array['car'])
+        self.lcdNumber_2.display(number_array['person'])
+        self.lcdNumber_3.display(number_array['truck'])
+        self.lcdNumber_4.display(number_array['bus'])
+        self.lcdNumber_5.display(number_array['rider'])
+
 
     def Start(self):
         print('start')
@@ -67,6 +79,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
             self.detectThread = DetectThread(p_source=rtspUrl)
             self.detectThread.sourceSignal.connect(self.display)
             self.detectThread.detectSignal.connect(self.displayDetect)
+            self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
             self.detectThread.start()
 
     def Stop(self):
@@ -97,6 +110,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
             self.detectThread = DetectThread(p_source=img_path)
             self.detectThread.sourceSignal.connect(self.display)
             self.detectThread.detectSignal.connect(self.displayDetect)
+            self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
             self.detectThread.start()
 
     def chooseVideo(self):
@@ -113,6 +127,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
             self.detectThread = DetectThread(p_source=video_path)
             self.detectThread.sourceSignal.connect(self.display)
             self.detectThread.detectSignal.connect(self.displayDetect)
+            self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
             self.detectThread.start()
 
     def activated(self):

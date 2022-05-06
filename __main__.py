@@ -63,5 +63,5 @@ if __name__ == '__main__':
     # ui.setupUi(mainWindow)  # 传对象
     # mainWindow.show()
 
-    app.setWindowIcon(QIcon("ui/images/zong.png"))
+    app.setWindowIcon(QIcon("ui/pic/images/zong.png"))
     sys.exit(app.exec_())  # 主要作用是用死循环来监听界面的关闭按钮等界面控制等事件

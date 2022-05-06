@@ -59,6 +59,9 @@ class DetectThread(QThread):
     # 定义信号,定义参数为str类型
     sourceSignal = pyqtSignal(QPixmap)
     detectSignal = pyqtSignal(QPixmap)
+
+    objectSignal = pyqtSignal(dict)
+
     running = True
 
     def changeModel(self):
@@ -87,7 +90,7 @@ class DetectThread(QThread):
             return self.stoped
 
     @torch.no_grad()
-    def detectRun(self,source):
+    def detectRun(self, source):
         save_img = True
         save_txt = True  # save results to *.txt
         half = False  # use FP16 half-precision inference
@@ -172,6 +175,10 @@ class DetectThread(QThread):
 
             # Process predictions
             for i, det in enumerate(pred):  # per image
+
+                # print(i)
+                # print(det.shape)
+
                 seen += 1
                 if webcam:  # batch_size >= 1
                     p, im0, frame = path[i], im0s[i].copy(), dataset.count
@@ -193,13 +200,33 @@ class DetectThread(QThread):
                 imc = im0.copy() if save_crop else im0  # for save_crop
                 annotator = Annotator(im0, line_width=line_thickness, example=str(names))
                 if len(det):
+
+                    # callback for ui number
+
                     # Rescale boxes from img_size to im0 size
                     det[:, :4] = scale_coords(im.shape[2:], det[:, :4], im0.shape).round()
 
                     # Print results
+                    number_array = {"car": 0, "person": 0, "truck": 0, "bus": 0, "rider": 0}
                     for c in det[:, -1].unique():
                         n = (det[:, -1] == c).sum()  # detections per class
                         s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
+                        print(int(c))
+                        object_index = int(c)
+                        object_number = int(n.item())
+                        print(n.item())
+                        if object_index == 0:
+                            number_array['person'] += object_number
+                        elif object_index == 2:
+                            number_array['car'] += object_number
+                        elif object_index == 7:
+                            number_array['truck'] += object_number
+                        elif object_index == 5:
+                            number_array['bus'] += object_number
+                        elif object_index == 1:
+                            number_array['rider'] += object_number
+
+                    self.objectSignal.emit(number_array)
 
                     # Write results
                     for *xyxy, conf, cls in reversed(det):
