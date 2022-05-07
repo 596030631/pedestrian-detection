@@ -2,17 +2,21 @@ import os
 
 import cv2
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QFileDialog
+from pyqt5_plugins.examplebuttonplugin import QtGui
 
 from __detection_ui__ import Ui_MainWindow
 from detect import DetectThread
 
 list_model = ['yolov5n.pt', 'yolov5s.pt']
 list_camera_ip = ['yolov5n.pt', 'yolov5s.pt']
+list_detect_name = ['all', 'car', 'person', 'truck', 'bus', 'rider']
 
 
 class DetectionDesigner(QMainWindow, Ui_MainWindow):
     currentSelectModelName = list_model[0]
     running = False
+    detect_name = "all"
+    pause = True # 暂停视频
 
     def __init__(self):
         super(DetectionDesigner, self).__init__()
@@ -38,6 +42,34 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.buttonImage.clicked.connect(self.chooseImage)
         self.buttonChooseVideo.clicked.connect(self.chooseVideo)
         self.buttonLocalCamera.clicked.connect(self.buttonOpenLocalCamera)
+        self.comboBox_select.addItem("car")
+        self.comboBox_select.addItem("person")
+        self.comboBox_select.addItem("truck")
+        self.comboBox_select.addItem("bus")
+        self.comboBox_select.addItem("rider")
+        self.comboBox_select.activated.connect(self.comboBoxSelect)
+        self.label_class_result.setText('all')
+        self.label_score_result.setText("35%")
+
+        self.runButton.clicked.connect(self.detect_trigger)
+
+
+    def detect_trigger(self):
+        print("-----------------")
+        self.pause = not self.pause
+        if self.pause:
+            print("pause")
+            icon7 = QtGui.QIcon()
+            icon7.addPixmap(QtGui.QPixmap(":stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.runButton.setIcon(icon7)
+            self.detectThread.detectPause()
+        else:
+            print("start")
+            icon7 = QtGui.QIcon()
+            icon7.addPixmap(QtGui.QPixmap(":start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.runButton.setIcon(icon7)
+            self.detectThread.detectStart()
+
 
     def buttonOpenLocalCamera(self):
         print('buttonOpenCamera')
@@ -57,6 +89,11 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         except:
             print()
 
+    def comboBoxSelect(self, name_index):
+        print("comboBoxSelect")
+        print(name_index)
+        self.label_class_result.setText(list_detect_name[name_index])
+        self.detect_name = list_detect_name[name_index]
 
     def displayobjectLcdNumber(self, number_array):
         print("displayObjectLcdLabel")
@@ -66,6 +103,16 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.lcdNumber_3.display(number_array['truck'])
         self.lcdNumber_4.display(number_array['bus'])
         self.lcdNumber_5.display(number_array['rider'])
+
+        if self.detect_name == "all":
+            print("all")
+            all_nu = 0
+            for nu in number_array.values():
+                all_nu += nu
+            print(all_nu)
+            self.label_numer_result.setText(f"{all_nu}")
+        else:
+            self.label_numer_result.setText(f"{number_array[self.detect_name]}")
 
 
     def Start(self):

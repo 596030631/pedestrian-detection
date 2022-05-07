@@ -18,7 +18,7 @@ class Ui_systemClass(object):
         systemClass.setMinimumSize(QtCore.QSize(940, 666))
         systemClass.setMaximumSize(QtCore.QSize(940, 666))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/pic/images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         systemClass.setWindowIcon(icon)
         systemClass.setStyleSheet("*{\n"
 "font-size:24px;\n"
@@ -90,7 +90,7 @@ class Ui_systemClass(object):
         self.buttonRegister.setObjectName("buttonRegister")
         self.label = QtWidgets.QLabel(systemClass)
         self.label.setGeometry(QtCore.QRect(40, 40, 851, 571))
-        self.label.setStyleSheet("border-image:url(:/pic/images/tu01.png)\n"
+        self.label.setStyleSheet("border-image:url(:/images/tu01.png)\n"
 "")
         self.label.setText("")
         self.label.setObjectName("label")
@@ -111,7 +111,7 @@ class Ui_systemClass(object):
 "background-color: rgba(223, 223, 223, 150);}")
         self.closeButton.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/pic/images/close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(":/images/close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.closeButton.setIcon(icon1)
         self.closeButton.setObjectName("closeButton")
         self.minButton = QtWidgets.QPushButton(systemClass)

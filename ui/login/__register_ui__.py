@@ -18,14 +18,14 @@ class Ui_Register(object):
         Register.setMinimumSize(QtCore.QSize(760, 528))
         Register.setMaximumSize(QtCore.QSize(760, 528))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/pic/images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Register.setWindowIcon(icon)
         Register.setStyleSheet("*{\n"
 "font-size:24px;\n"
 "font-family:sans-serif;\n"
 "}\n"
 "#Register{  \n"
-"    border-image: url(:/pic/images/re.png)\n"
+"    border-image: url(:/images/re.png)\n"
 "\n"
 "}\n"
 "QFrame{\n"

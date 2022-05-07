@@ -78,7 +78,8 @@ class DetectThread(QThread):
         with QtCore.QMutexLocker(self.mutex):
             self.stoped = False
 
-        self.main(self.source)
+        check_requirements(exclude=('tensorboard', 'thop'))
+        self.detectRun(source=self.source)
 
     def stop(self):
         self.running = False
@@ -89,9 +90,14 @@ class DetectThread(QThread):
         with QtCore.QMutexLocker(self.mutex):
             return self.stoped
 
+    def detectStart(self):
+        print("detectStart")
+
+    def detectStop(self):
+        print("detectStop")
+
     @torch.no_grad()
     def detectRun(self, source):
-        save_img = True
         save_txt = True  # save results to *.txt
         half = False  # use FP16 half-precision inference
         weights = ROOT / 'weights/yolov5n.pt'  # model.pt path(s)
@@ -283,10 +289,6 @@ class DetectThread(QThread):
             LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
         if update:
             strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
-
-    def main(self, source):
-        check_requirements(exclude=('tensorboard', 'thop'))
-        self.detectRun(source=source)
 
 #
 # def parse_opt(detect_source=None):

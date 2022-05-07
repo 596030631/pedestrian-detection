@@ -25,15 +25,11 @@ from PyQt5.QtGui import QIcon
 from __detection__ import DetectionDesigner
 from __login__ import LoginDesigner
 from __register__ import RegisterDesigner
-from detection.detect import DetectThread
 
 
 def initUI(self):
-
     self.closeButton.clicked.connect(self.close)
     self.show()
-
-
 
 
 if __name__ == '__main__':
@@ -51,11 +47,7 @@ if __name__ == '__main__':
     login_ui.login_success.connect(detection_ui.Open)
     login_ui.buttonRegister.clicked.connect(register.show)
 
-
-    login_ui.show()
-
-
-
+    detection_ui.show()
 
     # app = QApplication(sys.argv)
     # mainWindow = QMainWindow()
@@ -63,5 +55,5 @@ if __name__ == '__main__':
     # ui.setupUi(mainWindow)  # 传对象
     # mainWindow.show()
 
-    app.setWindowIcon(QIcon("ui/pic/images/zong.png"))
+    app.setWindowIcon(QIcon(":images/zong.png"))
     sys.exit(app.exec_())  # 主要作用是用死循环来监听界面的关闭按钮等界面控制等事件
