@@ -114,8 +114,6 @@ class RegisterDesigner(QMainWindow, Ui_Register):
             with open('users.pkl', 'wb') as f2:
                 pickle.dump(users, f2)
             # 提醒用户注册成功，询问是否登录
-            print("2222")
-
             choice = QMessageBox.information(None, '提示', '注册成功，是否登录？',
                                              QMessageBox.Yes | QMessageBox.No)
             # 如选择是，关闭注册页面，并在登录页面用户ID显示注册ID,密码

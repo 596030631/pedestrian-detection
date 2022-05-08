@@ -18,14 +18,14 @@ class Ui_Register(object):
         Register.setMinimumSize(QtCore.QSize(760, 528))
         Register.setMaximumSize(QtCore.QSize(760, 528))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/pic/images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Register.setWindowIcon(icon)
         Register.setStyleSheet("*{\n"
 "font-size:24px;\n"
 "font-family:sans-serif;\n"
 "}\n"
 "#Register{  \n"
-"    border-image: url(:/images/re.png)\n"
+"    border-image: url(:/pic/images/re.png)\n"
 "\n"
 "}\n"
 "QFrame{\n"
@@ -51,7 +51,7 @@ class Ui_Register(object):
         self.centralwidget = QtWidgets.QWidget(Register)
         self.centralwidget.setObjectName("centralwidget")
         self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(90, 60, 591, 421))
+        self.frame.setGeometry(QtCore.QRect(80, 50, 611, 421))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -73,6 +73,7 @@ class Ui_Register(object):
         self.label_4.setObjectName("label_4")
         self.userId = QtWidgets.QLineEdit(self.frame)
         self.userId.setGeometry(QtCore.QRect(190, 110, 341, 41))
+        self.userId.setToolTipDuration(-1)
         self.userId.setStyleSheet("font: 14pt \"楷体\";")
         self.userId.setText("")
         self.userId.setObjectName("userId")
@@ -112,9 +113,20 @@ class Ui_Register(object):
         self.label.setText(_translate("Register", "用户名ID："))
         self.label_3.setText(_translate("Register", "密    码："))
         self.label_4.setText(_translate("Register", "重复密码："))
-        self.userId.setPlaceholderText(_translate("Register", "空格不可用"))
-        self.password.setPlaceholderText(_translate("Register", "请输入6到10位密码"))
-        self.passwordAgain.setPlaceholderText(_translate("Register", "请再次输入密码"))
+        self.userId.setToolTip(_translate("Register", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'宋体\',\'monospace\'; font-size:10pt; color:#000000;\">输入用户名，字母数字，不可为中文或特殊字符。</span></p></body></html>"))
+        self.userId.setPlaceholderText(_translate("Register", "输入用户名，字母数字，不可为中文或特殊字符。"))
+        self.password.setToolTip(_translate("Register", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">密码为6到10位数字字母，首字母必须为大写。</span></p></body></html>"))
+        self.password.setPlaceholderText(_translate("Register", "密码为6到10位数字字母，首字母必须为大写"))
+        self.passwordAgain.setPlaceholderText(_translate("Register", "请再次确认密码！"))
         self.buttonRegister.setText(_translate("Register", "注  册"))
         self.buttonCLear.setText(_translate("Register", "重  填"))
         self.buttonExit.setText(_translate("Register", "取  消"))
+import myimages_rc

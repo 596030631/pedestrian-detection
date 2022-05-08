@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\\ui\\login\\__ui__.ui'
+# Form implementation generated from reading ui file '__ui__.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -18,7 +18,7 @@ class Ui_systemClass(object):
         systemClass.setMinimumSize(QtCore.QSize(940, 666))
         systemClass.setMaximumSize(QtCore.QSize(940, 666))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/pic/images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         systemClass.setWindowIcon(icon)
         systemClass.setStyleSheet("*{\n"
 "font-size:24px;\n"
@@ -76,21 +76,21 @@ class Ui_systemClass(object):
         self.password.setCursorPosition(0)
         self.password.setObjectName("password")
         self.checkRemember = QtWidgets.QCheckBox(self.frame)
-        self.checkRemember.setGeometry(QtCore.QRect(80, 260, 151, 41))
+        self.checkRemember.setGeometry(QtCore.QRect(100, 260, 151, 41))
         self.checkRemember.setObjectName("checkRemember")
         self.label_2 = QtWidgets.QLabel(self.frame)
         self.label_2.setGeometry(QtCore.QRect(280, 10, 81, 71))
         self.label_2.setStyleSheet("")
         self.label_2.setObjectName("label_2")
         self.buttonForget = QtWidgets.QTextEdit(self.frame)
-        self.buttonForget.setGeometry(QtCore.QRect(430, 260, 104, 31))
+        self.buttonForget.setGeometry(QtCore.QRect(420, 270, 104, 31))
         self.buttonForget.setObjectName("buttonForget")
         self.buttonRegister = QtWidgets.QPushButton(self.frame)
         self.buttonRegister.setGeometry(QtCore.QRect(340, 320, 201, 41))
         self.buttonRegister.setObjectName("buttonRegister")
         self.label = QtWidgets.QLabel(systemClass)
         self.label.setGeometry(QtCore.QRect(40, 40, 851, 571))
-        self.label.setStyleSheet("border-image:url(:/images/tu01.png)\n"
+        self.label.setStyleSheet("border-image:url(:/pic/images/tu01.png)\n"
 "")
         self.label.setText("")
         self.label.setObjectName("label")
@@ -131,12 +131,12 @@ class Ui_systemClass(object):
 "background-color: rgba(223, 223, 223, 150);}")
         self.minButton.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(":/pic/images/min.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(":/images/min.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.minButton.setIcon(icon2)
         self.minButton.setObjectName("minButton")
         self.label_3 = QtWidgets.QLabel(systemClass)
         self.label_3.setGeometry(QtCore.QRect(60, 50, 61, 41))
-        self.label_3.setStyleSheet("image: url(:/pic/images/zong.png);")
+        self.label_3.setStyleSheet("image: url(:/pic/images/zong.png)")
         self.label_3.setText("")
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(systemClass)
@@ -169,3 +169,4 @@ class Ui_systemClass(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:15px; text-decoration: underline; color:#00aaff;\">忘记密码？</span></p></body></html>"))
         self.buttonRegister.setText(_translate("systemClass", "注    册"))
         self.label_4.setText(_translate("systemClass", "<html><head/><body><p><span style=\" font-size:12pt;\">行人检测与追踪系统</span></p></body></html>"))
+import myimages_rc

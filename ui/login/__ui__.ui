@@ -26,8 +26,8 @@
    <string>system</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/images/zong.png</normaloff>:/images/zong.png</iconset>
+   <iconset resource="../myimages.qrc">
+    <normaloff>:/pic/images/zong.png</normaloff>:/pic/images/zong.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">*{
@@ -139,7 +139,7 @@ font-size:15px;
    <widget class="QCheckBox" name="checkRemember">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>100</x>
       <y>260</y>
       <width>151</width>
       <height>41</height>
@@ -168,8 +168,8 @@ font-size:15px;
    <widget class="QTextEdit" name="buttonForget">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>260</y>
+      <x>420</x>
+      <y>270</y>
       <width>104</width>
       <height>31</height>
      </rect>
@@ -206,7 +206,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image:url(:/images/tu01.png)
+    <string notr="true">border-image:url(:/pic/images/tu01.png)
 </string>
    </property>
    <property name="text">
@@ -307,7 +307,7 @@ background-color: rgba(223, 223, 223, 150);}</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">image: url(:/images/zong.png);</string>
+    <string notr="true">image: url(:/pic/images/zong.png)</string>
    </property>
    <property name="text">
     <string/>
@@ -334,7 +334,9 @@ background-color: rgba(223, 223, 223, 150);}</string>
   <zorder>label_4</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../myimages.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>closeButton</sender>

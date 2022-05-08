@@ -30,6 +30,7 @@ Usage - formats:
 import os
 import sys
 from pathlib import Path
+from time import sleep
 
 import torch
 import torch.backends.cudnn as cudnn
@@ -59,10 +60,13 @@ class DetectThread(QThread):
     # 定义信号,定义参数为str类型
     sourceSignal = pyqtSignal(QPixmap)
     detectSignal = pyqtSignal(QPixmap)
+    progressSignal = pyqtSignal(int)
 
     objectSignal = pyqtSignal(dict)
 
     running = True
+
+    detect_pause = True
 
     def changeModel(self):
         print("changeModel")
@@ -92,9 +96,11 @@ class DetectThread(QThread):
 
     def detectStart(self):
         print("detectStart")
+        self.detect_pause = False
 
-    def detectStop(self):
-        print("detectStop")
+    def detectPause(self):
+        print("detectPause")
+        self.detect_pause = True
 
     @torch.no_grad()
     def detectRun(self, source):
@@ -157,6 +163,16 @@ class DetectThread(QThread):
         model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
         dt, seen = [0.0, 0.0, 0.0], 0
         for path, im, im0s, vid_cap, s in dataset:
+
+            print(f"count {dataset.count}   frame {dataset.frame}  frames {dataset.frames}")
+
+            progress = (dataset.frame / dataset.frames) * 100
+            self.progressSignal.emit(int(progress))
+
+            while self.detect_pause:
+                print("sleep")
+                sleep(1)
+
             t1 = time_sync()
             im = torch.from_numpy(im).to(device)
             im = im.half() if model.fp16 else im.float()  # uint8 to fp16/32

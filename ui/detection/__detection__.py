@@ -1,6 +1,7 @@
 import os
 
 import cv2
+from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QFileDialog
 from pyqt5_plugins.examplebuttonplugin import QtGui
 
@@ -55,6 +56,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.actionversion.triggered.connect(self.action_version)
         self.actionhelp.triggered.connect(self.action_help)
         self.runButton.clicked.connect(self.detect_trigger)
+        self.progressBar.setMaximum(100)
 
     def action_save(self):
         print("save")
@@ -62,7 +64,8 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
 
     def action_help(self):
         print("save")
-        QMessageBox.question(None, "help", "保存\tCtrl+S\n账户管理\tCtrl+T\n版本信息\tF1\n帮助文档\tF2\n联系我们\tF3", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        QMessageBox.question(None, "help", "保存\tCtrl+S\n账户管理\tCtrl+T\n版本信息\tF1\n帮助文档\tF2\n联系我们\tF3",
+                             QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
     def action_author(self):
         print("author")
@@ -78,15 +81,17 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         if self.pause:
             print("pause")
             icon7 = QtGui.QIcon()
-            icon7.addPixmap(QtGui.QPixmap(":stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon7.addPixmap(QtGui.QPixmap(":images/stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             self.runButton.setIcon(icon7)
-            self.detectThread.detectPause()
+            if self.running:
+                self.detectThread.detectPause()
         else:
             print("start")
             icon7 = QtGui.QIcon()
-            icon7.addPixmap(QtGui.QPixmap(":start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon7.addPixmap(QtGui.QPixmap(":images/start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             self.runButton.setIcon(icon7)
-            self.detectThread.detectStart()
+            if self.running:
+                self.detectThread.detectStart()
 
     def buttonOpenLocalCamera(self):
         print('buttonOpenCamera')
@@ -102,9 +107,12 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
                 self.detectThread.sourceSignal.connect(self.display)
                 self.detectThread.detectSignal.connect(self.displayDetect)
                 self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
+                self.detectThread.progressSignal.connect(self.setting_progress)
                 self.detectThread.start()
         except:
             print()
+    def setting_progress(self, v):
+        self.progressBar.setValue(v)
 
     def comboBoxSelect(self, name_index):
         print("comboBoxSelect")
@@ -143,6 +151,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
             self.detectThread.sourceSignal.connect(self.display)
             self.detectThread.detectSignal.connect(self.displayDetect)
             self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
+            self.detectThread.progressSignal.connect(self.setting_progress)
             self.detectThread.start()
 
     def Stop(self):
@@ -174,6 +183,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
             self.detectThread.sourceSignal.connect(self.display)
             self.detectThread.detectSignal.connect(self.displayDetect)
             self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
+            self.detectThread.progressSignal.connect(self.setting_progress)
             self.detectThread.start()
 
     def chooseVideo(self):
@@ -191,6 +201,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
             self.detectThread.sourceSignal.connect(self.display)
             self.detectThread.detectSignal.connect(self.displayDetect)
             self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
+            self.detectThread.progressSignal.connect(self.setting_progress)
             self.detectThread.start()
 
     def activated(self):
