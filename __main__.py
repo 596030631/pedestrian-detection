@@ -24,12 +24,24 @@ from PyQt5.QtGui import QIcon
 #             closeEvent.ignore()
 from __detection__ import DetectionDesigner
 from __login__ import LoginDesigner
+from __manager__ import ManagerDesigner
 from __register__ import RegisterDesigner
 
 
 def initUI(self):
     self.closeButton.clicked.connect(self.close)
     self.show()
+
+app = QtWidgets.QApplication(sys.argv)
+login_ui = LoginDesigner()
+detection_ui = DetectionDesigner()
+manager_ui = ManagerDesigner()
+
+
+def exit_login():
+    manager_ui.close()
+    detection_ui.close()
+    login_ui.show()
 
 
 if __name__ == '__main__':
@@ -39,13 +51,15 @@ if __name__ == '__main__':
     # ui.setupUi(mainWindow)  # 传对象
     # mainWindow.show()
 
-    app = QtWidgets.QApplication(sys.argv)
-    login_ui = LoginDesigner()
-    detection_ui = DetectionDesigner()
+
+    manager_ui.buttonCancel.clicked.connect(manager_ui.close)
+    manager_ui.pushButton_exit.clicked.connect(exit_login)
+
     register = RegisterDesigner()
 
     login_ui.login_success.connect(detection_ui.Open)
     login_ui.buttonRegister.clicked.connect(register.show)
+    detection_ui.actionsetting.triggered.connect(manager_ui.show)
 
     detection_ui.show()
 
