@@ -16,7 +16,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
     currentSelectModelName = list_model[0]
     running = False
     detect_name = "all"
-    pause = True # 暂停视频
+    pause = True  # 暂停视频
 
     def __init__(self):
         super(DetectionDesigner, self).__init__()
@@ -50,9 +50,27 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.comboBox_select.activated.connect(self.comboBoxSelect)
         self.label_class_result.setText('all')
         self.label_score_result.setText("35%")
-
+        self.actionsave.triggered.connect(self.action_save)
+        self.actionauthor.triggered.connect(self.action_author)
+        self.actionversion.triggered.connect(self.action_version)
+        self.actionhelp.triggered.connect(self.action_help)
         self.runButton.clicked.connect(self.detect_trigger)
 
+    def action_save(self):
+        print("save")
+        QMessageBox.question(None, "温馨提示", "Save", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+    def action_help(self):
+        print("save")
+        QMessageBox.question(None, "help", "保存\tCtrl+S\n账户管理\tCtrl+T\n版本信息\tF1\n帮助文档\tF2\n联系我们\tF3", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+    def action_author(self):
+        print("author")
+        QMessageBox.question(None, "author", "alan", QMessageBox.No, QMessageBox.No)
+
+    def action_version(self):
+        print("version")
+        QMessageBox.question(None, "version", "v1.0.0", QMessageBox.No, QMessageBox.No)
 
     def detect_trigger(self):
         print("-----------------")
@@ -69,7 +87,6 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
             icon7.addPixmap(QtGui.QPixmap(":start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             self.runButton.setIcon(icon7)
             self.detectThread.detectStart()
-
 
     def buttonOpenLocalCamera(self):
         print('buttonOpenCamera')
@@ -113,7 +130,6 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
             self.label_numer_result.setText(f"{all_nu}")
         else:
             self.label_numer_result.setText(f"{number_array[self.detect_name]}")
-
 
     def Start(self):
         print('start')
