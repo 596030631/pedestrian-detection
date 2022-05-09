@@ -20,6 +20,7 @@ class LabelMouse(QLabel):
 class Label_click_Mouse(QLabel):
     clicked = pyqtSignal()
 
+
     # 鼠标点击事件
     def mousePressEvent(self, event):
         self.clicked.emit()

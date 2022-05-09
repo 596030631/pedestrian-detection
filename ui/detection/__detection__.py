@@ -57,6 +57,8 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.actionhelp.triggered.connect(self.action_help)
         self.runButton.clicked.connect(self.detect_trigger)
         self.progressBar.setMaximum(100)
+        self.raw_video.setScaledContents(True)
+        self.out_video_2.setScaledContents(True)
 
     def action_save(self):
         print("save")
