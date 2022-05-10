@@ -68,6 +68,7 @@ class DetectThread(QThread):
     iou = 0.45
 
     running = True
+    myclassSelected = 0 # 默认全部画框
 
     detect_pause = True
 
@@ -87,6 +88,10 @@ class DetectThread(QThread):
     def changeIOU(self, intValue):
         print("模型检测IOU变化" + str(intValue))
         self.iou = intValue / 100
+
+    def chooseSpecialClass(self, myClassesIndex):
+        print("選擇特定的类别" + str(myClassesIndex))
+        self.myclassSelected = myClassesIndex
 
     def run(self):
         self.running = True
@@ -142,8 +147,6 @@ class DetectThread(QThread):
         hide_conf = False  # hide confidences
         dnn = False,  # use OpenCV DNN for ONNX inference
 
-        print("11111")
-
         source = str(source)
         save_img = not nosave and not source.endswith('.txt')  # save inference images
         is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
@@ -151,33 +154,25 @@ class DetectThread(QThread):
         webcam = source.isnumeric() or source.endswith('.txt') or (is_url and not is_file)
         if is_url and is_file:
             source = check_file(source)  # download
-        print("22222")
 
         # Directories
         save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
         (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
-        print("3333")
 
         # Load model
         device = select_device(device)
         model = DetectMultiBackend(weights, device=device, dnn=dnn, data=data, fp16=half)
         stride, names, pt = model.stride, model.names, model.pt
         imgsz = check_img_size(imgsz, s=stride)  # check image size
-        print("44444")
 
         # Dataloader
         if webcam:
-            print("5555")
 
             view_img = check_imshow()
             cudnn.benchmark = True  # set True to speed up constant image size inference
             dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=pt)
-            print("7777")
-
             bs = len(dataset)  # batch_size
         else:
-            print("6666")
-
             dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)
             bs = 1  # batch_size
         vid_path, vid_writer = [None] * bs, [None] * bs
@@ -185,17 +180,22 @@ class DetectThread(QThread):
         model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
         dt, seen = [0.0, 0.0, 0.0], 0
         for path, im, im0s, vid_cap, s in dataset:
-            print("8888")
 
             if not webcam:
-                print(f"count {dataset.count}   frame {dataset.frame}  frames {dataset.frames}")
-                progress = (dataset.frame / dataset.frames) * 100
-                self.progressSignal.emit(int(progress))
+                if not dataset.mode == 'image':
+                  print(f"count {dataset.count}")
+                  print(f"frame {dataset.frame}")
+                  print(f"frames {dataset.frames}")
+                  progress = (dataset.frame / dataset.frames) * 100
+                  self.progressSignal.emit(int(progress))
 
             while self.detect_pause:
-                print("sleep")
-                sleep(1)
 
+                if not self.running:
+                    print("检测结束")
+                    return
+                sleep(1)
+                print("sleep")
             t1 = time_sync()
             im = torch.from_numpy(im).to(device)
             im = im.half() if model.fp16 else im.float()  # uint8 to fp16/32
@@ -252,7 +252,9 @@ class DetectThread(QThread):
                     det[:, :4] = scale_coords(im.shape[2:], det[:, :4], im0.shape).round()
 
                     # Print results
-                    number_array = {"car": 0, "person": 0, "truck": 0, "bus": 0, "rider": 0}
+                    # 'all' 'car', 'person', 'bicycle', 'motorcycle', 'traffic light', 'truck']
+                    #
+                    number_array = {"0": int(len(det)), "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}
                     for c in det[:, -1].unique():
                         n = (det[:, -1] == c).sum()  # detections per class
                         s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
@@ -260,16 +262,18 @@ class DetectThread(QThread):
                         object_index = int(c)
                         object_number = int(n.item())
                         print(n.item())
-                        if object_index == 0:
-                            number_array['person'] += object_number
-                        elif object_index == 2:
-                            number_array['car'] += object_number
-                        elif object_index == 7:
-                            number_array['truck'] += object_number
-                        elif object_index == 5:
-                            number_array['bus'] += object_number
+                        if object_index == 2:
+                            number_array['1'] += object_number
+                        elif object_index == 0:
+                            number_array['2'] += object_number
                         elif object_index == 1:
-                            number_array['rider'] += object_number
+                            number_array['3'] += object_number
+                        elif object_index == 3:
+                            number_array['4'] += object_number
+                        elif object_index == 9:
+                            number_array['5'] += object_number
+                        elif object_index == 7:
+                            number_array['6'] += object_number
 
                     self.objectSignal.emit(number_array)
 
@@ -301,6 +305,7 @@ class DetectThread(QThread):
                 # Save results (image with detections)
                 if save_img:
                     if dataset.mode == 'image':
+                        cv2.cvtColor(im0, cv2.COLOR_BGR2RGB, im0)
                         cv2.imwrite(save_path, im0)
                     else:  # 'video' or 'stream'
                         if vid_path[i] != save_path:  # new video
