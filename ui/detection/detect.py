@@ -68,7 +68,7 @@ class DetectThread(QThread):
     iou = 0.45
 
     running = True
-    myclassSelected = 0 # 默认全部画框
+    myclassSelected = 0  # 默认全部画框
 
     detect_pause = True
 
@@ -89,9 +89,9 @@ class DetectThread(QThread):
         print("模型检测IOU变化" + str(intValue))
         self.iou = intValue / 100
 
-    def chooseSpecialClass(self, myClassesIndex):
-        print("選擇特定的类别" + str(myClassesIndex))
-        self.myclassSelected = myClassesIndex
+    def chooseSpecialClass(self, cls):
+        print("選擇特定的类别" + str(cls))
+        self.myclassSelected = cls
 
     def run(self):
         self.running = True
@@ -167,7 +167,6 @@ class DetectThread(QThread):
 
         # Dataloader
         if webcam:
-
             view_img = check_imshow()
             cudnn.benchmark = True  # set True to speed up constant image size inference
             dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=pt)
@@ -180,17 +179,15 @@ class DetectThread(QThread):
         model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
         dt, seen = [0.0, 0.0, 0.0], 0
         for path, im, im0s, vid_cap, s in dataset:
-
             if not webcam:
                 if not dataset.mode == 'image':
-                  print(f"count {dataset.count}")
-                  print(f"frame {dataset.frame}")
-                  print(f"frames {dataset.frames}")
-                  progress = (dataset.frame / dataset.frames) * 100
-                  self.progressSignal.emit(int(progress))
+                    print(f"count {dataset.count}")
+                    print(f"frame {dataset.frame}")
+                    print(f"frames {dataset.frames}")
+                    progress = (dataset.frame / dataset.frames) * 100
+                    self.progressSignal.emit(int(progress))
 
             while self.detect_pause:
-
                 if not self.running:
                     print("检测结束")
                     return
@@ -220,10 +217,6 @@ class DetectThread(QThread):
 
             # Process predictions
             for i, det in enumerate(pred):  # per image
-
-                # print(i)
-                # print(det.shape)
-
                 seen += 1
                 if webcam:  # batch_size >= 1
                     p, im0, frame = path[i], im0s[i].copy(), dataset.count
@@ -279,11 +272,16 @@ class DetectThread(QThread):
 
                     # Write results
                     for *xyxy, conf, cls in reversed(det):
+                        if self.myclassSelected != 0:
+                            if int(cls) != self.myclassSelected:
+                                continue
+
                         if save_txt:  # Write to file
                             xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                             line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format
                             with open(txt_path + '.txt', 'a') as f:
                                 f.write(('%g ' * len(line)).rstrip() % line + '\n')
+                        print(f"vvvvvvvvvvvvvvvvvvvvv {cls}")
 
                         if save_img or save_crop or view_img:  # Add bbox to image
                             c = int(cls)  # integer class
@@ -294,13 +292,13 @@ class DetectThread(QThread):
 
                 # Stream results
                 im0 = annotator.result()
-                if True:
-                    image = QImage(im0.data, width, height, bytesPerLine, QImage.Format_RGB888)
-                    self.detectSignal.emit(QPixmap.fromImage(image))
-                    if not self.running:
-                        dataset.stop_cv()
-                        return
-                    cv2.waitKey(1)  # 1 millisecond
+
+                image = QImage(im0.data, width, height, bytesPerLine, QImage.Format_RGB888)
+                self.detectSignal.emit(QPixmap.fromImage(image))
+                if not self.running:
+                    dataset.stop_cv()
+                    return
+                cv2.waitKey(1)  # 1 millisecond
 
                 # Save results (image with detections)
                 if save_img:
