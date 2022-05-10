@@ -71,6 +71,9 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
     def probChange(self, value):
         print("置信度改变 " + str(value))
         self.conSpinBox.setValue(value / 100)
+        if self.running:
+            self.detectThread.changeProb(value)
+
 
     def iouChange(self, value):
         print("IOU改变 " + str(value))

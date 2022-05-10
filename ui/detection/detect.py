@@ -77,6 +77,9 @@ class DetectThread(QThread):
         self.stoped = False
         self.mutex = QtCore.QMutex()
 
+    def changeProb(self, intValue):
+        print("模型检测置信度变化" + str(intValue))
+
     def run(self):
         self.running = True
         with QtCore.QMutexLocker(self.mutex):
@@ -131,6 +134,8 @@ class DetectThread(QThread):
         hide_conf = False  # hide confidences
         dnn = False,  # use OpenCV DNN for ONNX inference
 
+        print("11111")
+
         source = str(source)
         save_img = not nosave and not source.endswith('.txt')  # save inference images
         is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
@@ -138,24 +143,33 @@ class DetectThread(QThread):
         webcam = source.isnumeric() or source.endswith('.txt') or (is_url and not is_file)
         if is_url and is_file:
             source = check_file(source)  # download
+        print("22222")
 
         # Directories
         save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
         (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
+        print("3333")
 
         # Load model
         device = select_device(device)
         model = DetectMultiBackend(weights, device=device, dnn=dnn, data=data, fp16=half)
         stride, names, pt = model.stride, model.names, model.pt
         imgsz = check_img_size(imgsz, s=stride)  # check image size
+        print("44444")
 
         # Dataloader
         if webcam:
+            print("5555")
+
             view_img = check_imshow()
             cudnn.benchmark = True  # set True to speed up constant image size inference
             dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=pt)
+            print("7777")
+
             bs = len(dataset)  # batch_size
         else:
+            print("6666")
+
             dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)
             bs = 1  # batch_size
         vid_path, vid_writer = [None] * bs, [None] * bs
@@ -163,11 +177,12 @@ class DetectThread(QThread):
         model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
         dt, seen = [0.0, 0.0, 0.0], 0
         for path, im, im0s, vid_cap, s in dataset:
+            print("8888")
 
-            print(f"count {dataset.count}   frame {dataset.frame}  frames {dataset.frames}")
-
-            progress = (dataset.frame / dataset.frames) * 100
-            self.progressSignal.emit(int(progress))
+            if not webcam:
+                print(f"count {dataset.count}   frame {dataset.frame}  frames {dataset.frames}")
+                progress = (dataset.frame / dataset.frames) * 100
+                self.progressSignal.emit(int(progress))
 
             while self.detect_pause:
                 print("sleep")
