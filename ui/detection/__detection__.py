@@ -1,7 +1,6 @@
 import os
 
 import cv2
-from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QFileDialog
 from pyqt5_plugins.examplebuttonplugin import QtGui
 
@@ -43,14 +42,13 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.buttonImage.clicked.connect(self.chooseImage)
         self.buttonChooseVideo.clicked.connect(self.chooseVideo)
         self.buttonLocalCamera.clicked.connect(self.buttonOpenLocalCamera)
+
         self.comboBox_select.addItem("car")
         self.comboBox_select.addItem("person")
         self.comboBox_select.addItem("truck")
         self.comboBox_select.addItem("bus")
         self.comboBox_select.addItem("rider")
         self.comboBox_select.activated.connect(self.comboBoxSelect)
-        self.label_class_result.setText('all')
-        self.label_score_result.setText("35%")
         self.actionsave.triggered.connect(self.action_save)
         self.actionauthor.triggered.connect(self.action_author)
         self.actionversion.triggered.connect(self.action_version)
@@ -59,6 +57,24 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.progressBar.setMaximum(100)
         self.raw_video.setScaledContents(True)
         self.out_video_2.setScaledContents(True)
+
+        self.horizontalSlider.setMaximum(100)  # 置信度
+        self.horizontalSlider.setValue(35)
+        self.conSpinBox.setValue(0.35)
+        self.horizontalSlider.valueChanged.connect(self.probChange)
+
+        self.horizontalSlider_iou.setMaximum(100)  # iou
+        self.horizontalSlider_iou.setValue(25)
+        self.iouSpinBox_2.setValue(0.25)
+        self.horizontalSlider_iou.valueChanged.connect(self.iouChange)
+
+    def probChange(self, value):
+        print("置信度改变 " + str(value))
+        self.conSpinBox.setValue(value / 100)
+
+    def iouChange(self, value):
+        print("IOU改变 " + str(value))
+        self.iouSpinBox_2.setValue(value / 100)
 
     def action_save(self):
         print("save")
@@ -113,13 +129,13 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
                 self.detectThread.start()
         except:
             print()
+
     def setting_progress(self, v):
         self.progressBar.setValue(v)
 
     def comboBoxSelect(self, name_index):
         print("comboBoxSelect")
         print(name_index)
-        self.label_class_result.setText(list_detect_name[name_index])
         self.detect_name = list_detect_name[name_index]
 
     def displayobjectLcdNumber(self, number_array):

@@ -1,6 +1,8 @@
 <RCC>
   <qresource prefix="pic">
     <file>images/re.png</file>
+    <file>images/up.png</file>
+    <file>images/down.png</file>
     <file>images/version.png</file>
     <file>images/picselect.png</file>
     <file>images/stop.png</file>

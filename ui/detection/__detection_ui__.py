@@ -14,9 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1750, 885)
-        MainWindow.setMinimumSize(QtCore.QSize(1750, 885))
-        MainWindow.setMaximumSize(QtCore.QSize(1800, 900))
+        MainWindow.resize(1750, 890)
+        MainWindow.setMinimumSize(QtCore.QSize(1750, 890))
+        MainWindow.setMaximumSize(QtCore.QSize(1800, 915))
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/pic/images/zong.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -55,7 +55,7 @@ class Ui_MainWindow(object):
         self.toolButton_camera.setIconSize(QtCore.QSize(50, 50))
         self.toolButton_camera.setObjectName("toolButton_camera")
         self.toolButton_file = QtWidgets.QToolButton(self.centralwidget)
-        self.toolButton_file.setGeometry(QtCore.QRect(40, 340, 50, 50))
+        self.toolButton_file.setGeometry(QtCore.QRect(40, 330, 50, 50))
         self.toolButton_file.setMaximumSize(QtCore.QSize(50, 50))
         self.toolButton_file.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton_file.setStyleSheet("background-color: transparent;")
@@ -65,7 +65,7 @@ class Ui_MainWindow(object):
         self.toolButton_file.setIconSize(QtCore.QSize(40, 40))
         self.toolButton_file.setObjectName("toolButton_file")
         self.toolButton_video = QtWidgets.QToolButton(self.centralwidget)
-        self.toolButton_video.setGeometry(QtCore.QRect(40, 410, 50, 50))
+        self.toolButton_video.setGeometry(QtCore.QRect(40, 400, 50, 50))
         self.toolButton_video.setMinimumSize(QtCore.QSize(50, 50))
         self.toolButton_video.setMaximumSize(QtCore.QSize(50, 50))
         self.toolButton_video.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -233,7 +233,7 @@ class Ui_MainWindow(object):
         self.stopButton.setObjectName("stopButton")
         self.horizontalLayout_12.addWidget(self.stopButton)
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
-        self.frame_2.setGeometry(QtCore.QRect(-10, 600, 221, 251))
+        self.frame_2.setGeometry(QtCore.QRect(10, 570, 221, 291))
         self.frame_2.setStyleSheet("")
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -247,7 +247,7 @@ class Ui_MainWindow(object):
 "}")
         self.pushButton_3.setObjectName("pushButton_3")
         self.formLayoutWidget = QtWidgets.QWidget(self.frame_2)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(30, 80, 181, 161))
+        self.formLayoutWidget.setGeometry(QtCore.QRect(10, 80, 203, 191))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -255,6 +255,9 @@ class Ui_MainWindow(object):
         self.label_6 = QtWidgets.QLabel(self.formLayoutWidget)
         self.label_6.setObjectName("label_6")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_6)
+        self.lcdNumber_1 = QtWidgets.QLCDNumber(self.formLayoutWidget)
+        self.lcdNumber_1.setObjectName("lcdNumber_1")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.lcdNumber_1)
         self.label_7 = QtWidgets.QLabel(self.formLayoutWidget)
         self.label_7.setObjectName("label_7")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_7)
@@ -273,50 +276,54 @@ class Ui_MainWindow(object):
         self.lcdNumber_4 = QtWidgets.QLCDNumber(self.formLayoutWidget)
         self.lcdNumber_4.setObjectName("lcdNumber_4")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.lcdNumber_4)
-        self.lcdNumber_1 = QtWidgets.QLCDNumber(self.formLayoutWidget)
-        self.lcdNumber_1.setObjectName("lcdNumber_1")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.lcdNumber_1)
         self.label_10 = QtWidgets.QLabel(self.formLayoutWidget)
         self.label_10.setObjectName("label_10")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_10)
         self.lcdNumber_5 = QtWidgets.QLCDNumber(self.formLayoutWidget)
         self.lcdNumber_5.setObjectName("lcdNumber_5")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.lcdNumber_5)
+        self.label = QtWidgets.QLabel(self.formLayoutWidget)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.lcdNumber = QtWidgets.QLCDNumber(self.formLayoutWidget)
+        self.lcdNumber.setObjectName("lcdNumber")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.lcdNumber)
         self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(210, 600, 271, 241))
+        self.frame.setGeometry(QtCore.QRect(230, 570, 271, 291))
+        self.frame.setStyleSheet("QDoubleSpinBox{\n"
+"background:rgba(200, 200, 200,50);\n"
+"color:white;\n"
+"font-size: 14px;\n"
+"border-style: solid;\n"
+"border-width: 1px;\n"
+"border-color: rgba(200, 200, 200,100);\n"
+"border-radius: 3px;}\n"
+"\n"
+"QDoubleSpinBox::down-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(:/pic/images/down.png);}\n"
+"QDoubleSpinBox::down-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(:/pic/images/down.png);}\n"
+"\n"
+"QDoubleSpinBox::up-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(:/pic/images/up.png);}\n"
+"QDoubleSpinBox::up-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(:/pic/images/up.png);}")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.label_class = QtWidgets.QLabel(self.frame)
-        self.label_class.setGeometry(QtCore.QRect(20, 140, 86, 31))
-        font = QtGui.QFont()
-        font.setFamily("华文仿宋")
-        font.setPointSize(18)
-        self.label_class.setFont(font)
-        self.label_class.setObjectName("label_class")
         self.label_conf = QtWidgets.QLabel(self.frame)
-        self.label_conf.setGeometry(QtCore.QRect(20, 190, 111, 31))
+        self.label_conf.setGeometry(QtCore.QRect(10, 200, 111, 31))
         font = QtGui.QFont()
         font.setFamily("华文仿宋")
         font.setPointSize(18)
         self.label_conf.setFont(font)
         self.label_conf.setObjectName("label_conf")
-        self.label_class_result = QtWidgets.QLabel(self.frame)
-        self.label_class_result.setGeometry(QtCore.QRect(80, 130, 171, 29))
-        font = QtGui.QFont()
-        font.setPointSize(18)
-        self.label_class_result.setFont(font)
-        self.label_class_result.setStyleSheet("color:rgb(0, 170, 255)")
-        self.label_class_result.setObjectName("label_class_result")
-        self.label_score_result = QtWidgets.QLabel(self.frame)
-        self.label_score_result.setGeometry(QtCore.QRect(100, 180, 61, 31))
-        font = QtGui.QFont()
-        font.setPointSize(18)
-        self.label_score_result.setFont(font)
-        self.label_score_result.setStyleSheet("color: rgb(0, 170, 255);")
-        self.label_score_result.setObjectName("label_score_result")
         self.comboBox_select = QtWidgets.QComboBox(self.frame)
-        self.comboBox_select.setGeometry(QtCore.QRect(90, 20, 141, 31))
+        self.comboBox_select.setGeometry(QtCore.QRect(90, 30, 141, 31))
         font = QtGui.QFont()
         font.setFamily("楷体")
         font.setPointSize(12)
@@ -332,24 +339,68 @@ class Ui_MainWindow(object):
         self.comboBox_select.setObjectName("comboBox_select")
         self.comboBox_select.addItem("")
         self.label_picSelect = QtWidgets.QLabel(self.frame)
-        self.label_picSelect.setGeometry(QtCore.QRect(20, 10, 51, 51))
+        self.label_picSelect.setGeometry(QtCore.QRect(20, 20, 51, 51))
         self.label_picSelect.setStyleSheet("border-image: url(:/pic/images/picselect.png)")
         self.label_picSelect.setText("")
         self.label_picSelect.setObjectName("label_picSelect")
         self.label_objNum = QtWidgets.QLabel(self.frame)
-        self.label_objNum.setGeometry(QtCore.QRect(20, 80, 131, 31))
+        self.label_objNum.setGeometry(QtCore.QRect(10, 80, 131, 31))
         font = QtGui.QFont()
         font.setFamily("华文仿宋")
         font.setPointSize(18)
         self.label_objNum.setFont(font)
         self.label_objNum.setObjectName("label_objNum")
         self.label_numer_result = QtWidgets.QLabel(self.frame)
-        self.label_numer_result.setGeometry(QtCore.QRect(120, 80, 61, 31))
+        self.label_numer_result.setGeometry(QtCore.QRect(130, 80, 61, 31))
         font = QtGui.QFont()
         font.setPointSize(18)
         self.label_numer_result.setFont(font)
         self.label_numer_result.setStyleSheet("color: rgb(0, 170, 255);")
         self.label_numer_result.setObjectName("label_numer_result")
+        self.horizontalSlider = QtWidgets.QSlider(self.frame)
+        self.horizontalSlider.setGeometry(QtCore.QRect(99, 230, 161, 22))
+        self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider.setObjectName("horizontalSlider")
+        self.conSpinBox = QtWidgets.QDoubleSpinBox(self.frame)
+        self.conSpinBox.setGeometry(QtCore.QRect(10, 230, 61, 31))
+        self.conSpinBox.setStyleSheet("")
+        self.conSpinBox.setObjectName("conSpinBox")
+        self.label_conf_2 = QtWidgets.QLabel(self.frame)
+        self.label_conf_2.setGeometry(QtCore.QRect(10, 120, 111, 31))
+        font = QtGui.QFont()
+        font.setFamily("华文仿宋")
+        font.setPointSize(18)
+        self.label_conf_2.setFont(font)
+        self.label_conf_2.setObjectName("label_conf_2")
+        self.iouSpinBox_2 = QtWidgets.QDoubleSpinBox(self.frame)
+        self.iouSpinBox_2.setGeometry(QtCore.QRect(10, 151, 61, 31))
+        self.iouSpinBox_2.setStyleSheet("QDoubleSpinBox{\n"
+"background:rgba(200, 200, 200,50);\n"
+"color:white;\n"
+"font-size: 14px;\n"
+"border-style: solid;\n"
+"border-width: 1px;\n"
+"border-color: rgba(200, 200, 200,100);\n"
+"border-radius: 3px;}\n"
+"\n"
+"QDoubleSpinBox::down-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(:/pic/images/down.png);}\n"
+"QDoubleSpinBox::down-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(:/pic/images/down.png);}\n"
+"\n"
+"QDoubleSpinBox::up-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(:/pic/images/up.png);}\n"
+"QDoubleSpinBox::up-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(:/pic/images/up.png);}")
+        self.iouSpinBox_2.setObjectName("iouSpinBox_2")
+        self.horizontalSlider_iou = QtWidgets.QSlider(self.frame)
+        self.horizontalSlider_iou.setGeometry(QtCore.QRect(99, 160, 161, 22))
+        self.horizontalSlider_iou.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider_iou.setObjectName("horizontalSlider_iou")
         self.comboBoxModel = QtWidgets.QComboBox(self.centralwidget)
         self.comboBoxModel.setGeometry(QtCore.QRect(130, 110, 261, 41))
         self.comboBoxModel.setObjectName("comboBoxModel")
@@ -357,10 +408,10 @@ class Ui_MainWindow(object):
         self.comboBoxCameraIP.setGeometry(QtCore.QRect(130, 190, 261, 41))
         self.comboBoxCameraIP.setObjectName("comboBoxCameraIP")
         self.buttonChooseVideo = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonChooseVideo.setGeometry(QtCore.QRect(130, 410, 261, 51))
+        self.buttonChooseVideo.setGeometry(QtCore.QRect(130, 400, 261, 51))
         self.buttonChooseVideo.setObjectName("buttonChooseVideo")
         self.buttonImage = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonImage.setGeometry(QtCore.QRect(130, 340, 261, 51))
+        self.buttonImage.setGeometry(QtCore.QRect(130, 330, 261, 51))
         self.buttonImage.setObjectName("buttonImage")
         self.buttonLocalCamera = QtWidgets.QPushButton(self.centralwidget)
         self.buttonLocalCamera.setGeometry(QtCore.QRect(130, 260, 261, 51))
@@ -389,6 +440,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.toolBar = QtWidgets.QToolBar(MainWindow)
+        self.toolBar.setMinimumSize(QtCore.QSize(41, 860))
         font = QtGui.QFont()
         font.setPointSize(9)
         self.toolBar.setFont(font)
@@ -453,16 +505,15 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">car</span></p></body></html>"))
         self.label_7.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">pedestrian</span></p></body></html>"))
         self.label_8.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">truck</span></p></body></html>"))
-        self.label_9.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">bus</span></p></body></html>"))
-        self.label_10.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">rider</span></p></body></html>"))
-        self.label_class.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">类别：<br/></span></p></body></html>"))
+        self.label_9.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">traffic light</span></p></body></html>"))
+        self.label_10.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">motorcycle</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">bicycle</span></p></body></html>"))
         self.label_conf.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">置信度：<br/></span></p></body></html>"))
-        self.label_class_result.setText(_translate("MainWindow", "None"))
-        self.label_score_result.setText(_translate("MainWindow", "0"))
         self.comboBox_select.setCurrentText(_translate("MainWindow", "所有目标"))
         self.comboBox_select.setItemText(0, _translate("MainWindow", "所有目标"))
         self.label_objNum.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">目标数目：</span><br/></p></body></html>"))
         self.label_numer_result.setText(_translate("MainWindow", "0"))
+        self.label_conf_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#ffffff;\">IoU：</span></p></body></html>"))
         self.buttonChooseVideo.setText(_translate("MainWindow", "选择检测视频"))
         self.buttonImage.setText(_translate("MainWindow", "选择检测图片"))
         self.buttonLocalCamera.setText(_translate("MainWindow", "本地摄像头关闭"))
