@@ -510,8 +510,12 @@ background-color: rgba(223, 223, 223, 150);}</string>
         <iconset resource="../myimages.qrc">
          <normaloff>:/pic/images/start.png</normaloff>
          <normalon>:/pic/images/goon.png</normalon>
+         <disabledoff>:/pic/images/start.png</disabledoff>
          <disabledon>:/pic/images/goon.png</disabledon>
-         <activeon>:/pic/images/goon.png</activeon>:/pic/images/start.png</iconset>
+         <activeoff>:/pic/images/start.png</activeoff>
+         <activeon>:/pic/images/goon.png</activeon>
+         <selectedoff>:/pic/images/start.png</selectedoff>
+         <selectedon>:/pic/images/goon.png</selectedon>:/pic/images/start.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -667,7 +671,7 @@ border-radius:15px;
       <item row="3" column="0">
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;traffic light&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;motorcycle&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -677,7 +681,7 @@ border-radius:15px;
       <item row="4" column="0">
        <widget class="QLabel" name="label_10">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;motorcycle&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;traffic light&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -1028,8 +1032,8 @@ border-image: url(:/pic/images/up.png);}</string>
   <widget class="QToolBar" name="toolBar">
    <property name="minimumSize">
     <size>
-     <width>41</width>
-     <height>860</height>
+     <width>0</width>
+     <height>0</height>
     </size>
    </property>
    <property name="font">

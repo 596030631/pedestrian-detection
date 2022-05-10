@@ -61,6 +61,7 @@ class DetectThread(QThread):
     sourceSignal = pyqtSignal(QPixmap)
     detectSignal = pyqtSignal(QPixmap)
     progressSignal = pyqtSignal(int)
+    detectEndSingle = pyqtSignal(int)
 
     objectSignal = pyqtSignal(dict)
 
@@ -70,7 +71,7 @@ class DetectThread(QThread):
     running = True
     myclassSelected = 0  # 默认全部画框
 
-    detect_pause = True
+    detect_pause = False
 
     def changeModel(self):
         print("changeModel")
@@ -281,7 +282,6 @@ class DetectThread(QThread):
                             line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format
                             with open(txt_path + '.txt', 'a') as f:
                                 f.write(('%g ' * len(line)).rstrip() % line + '\n')
-                        print(f"vvvvvvvvvvvvvvvvvvvvv {cls}")
 
                         if save_img or save_crop or view_img:  # Add bbox to image
                             c = int(cls)  # integer class
@@ -302,8 +302,8 @@ class DetectThread(QThread):
 
                 # Save results (image with detections)
                 if save_img:
+                    cv2.cvtColor(im0, cv2.COLOR_BGR2RGB, im0)
                     if dataset.mode == 'image':
-                        cv2.cvtColor(im0, cv2.COLOR_BGR2RGB, im0)
                         cv2.imwrite(save_path, im0)
                     else:  # 'video' or 'stream'
                         if vid_path[i] != save_path:  # new video
@@ -331,6 +331,8 @@ class DetectThread(QThread):
             LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
         if update:
             strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
+
+        self.detectEndSingle.emit(0)
 
 #
 # def parse_opt(detect_source=None):

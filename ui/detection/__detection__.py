@@ -17,7 +17,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
     currentSelectModelName = list_model[0]
     running = False
     detect_name_index = 0
-    pause = True  # 暂停视频
+    pause = False  # 暂停检测
 
     def __init__(self):
         super(DetectionDesigner, self).__init__()
@@ -54,6 +54,7 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.comboBox_select.addItem("motorcycle")
         self.comboBox_select.addItem("traffic light")
         self.comboBox_select.addItem("truck")
+
         self.comboBox_select.activated.connect(self.comboBoxSelectClass)
         self.actionsave.triggered.connect(self.action_save)
         self.actionauthor.triggered.connect(self.action_author)
@@ -74,7 +75,15 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
         self.iouSpinBox_2.setValue(0.25)
         self.horizontalSlider_iou.valueChanged.connect(self.iouChange)
 
+        # 播放暂停按钮默认不可用
+        self.runButton.setEnabled(False)
+
+
+
     def StartRtsp(self):
+        self.runButton.setEnabled(True)
+        self.pause = False
+        self.detect_trigger()
         self.StartNewResource('rtsp://admin:123456@192.168.31.46:3389/stream0')
 
     def probChange(self, value):
@@ -126,6 +135,9 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
 
     def buttonOpenLocalCamera(self):
         print('buttonOpenCamera')
+        self.runButton.setEnabled(True)
+        self.pause = False
+        self.detect_trigger()
         try:
             if self.running:
                 self.StopSource()
@@ -180,12 +192,12 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
 
         else:
             self.running = True
-            # rtspUrl =
             self.detectThread = DetectThread(p_source=source)
             self.detectThread.sourceSignal.connect(self.display)
             self.detectThread.detectSignal.connect(self.displayDetect)
             self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
             self.detectThread.progressSignal.connect(self.setting_progress)
+            self.detectThread.detectEndSingle.connect(self.StopSource)
             self.detectThread.start()
 
     def StopSource(self):
@@ -197,48 +209,25 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
 
     def chooseImage(self):
         print('chooseImage')
+        self.runButton.setEnabled(False)
+        self.pause = False
+        self.detect_trigger()
+
         filename = QFileDialog.getOpenFileNames(self, '选择图像', os.getcwd(), "All Files(*.jpg))")
         print(filename)
         img_path = filename[0][0]
         print(img_path)
         img = cv2.imread(img_path)
-        print(img)
-        # height, width, bytesPerComponent = img.shape
-        # bytesPerLine = bytesPerComponent * width
-        # cv2.cvtColor(img, cv2.COLOR_BGR2RGB, img)
-        # img = QImage(img.data, width, height, bytesPerLine, QImage.Format_RGB888)
-        # self.raw_video.setPixmap(QPixmap.fromImage(img))
-
-        # if self.running:
-        #     self.running = False
-        #     self.detectThread.stop()
-        # else:
-        #     self.running = True
-        #     self.detectThread = DetectThread(p_source=img_path)
-        #     self.detectThread.sourceSignal.connect(self.display)
-        #     self.detectThread.detectSignal.connect(self.displayDetect)
-        #     self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
-        #     self.detectThread.progressSignal.connect(self.setting_progress)
-        #     self.detectThread.start()
         self.StartNewResource(source=img_path)
 
     def chooseVideo(self):
         print('chooseVideo')
+        self.runButton.setEnabled(True)
+        self.pause = False
+        self.detect_trigger()
         filename = QFileDialog.getOpenFileNames(self, '选择视频', os.getcwd(), "All Files(*.mp4)")
         print(filename)
         video_path = filename[0][0]
-
-        # if self.running:
-        #     self.running = False
-        #     self.detectThread.stop()
-        # else:
-        #     self.running = True
-        #     self.detectThread = DetectThread(p_source=video_path)
-        #     self.detectThread.sourceSignal.connect(self.display)
-        #     self.detectThread.detectSignal.connect(self.displayDetect)
-        #     self.detectThread.objectSignal.connect(self.displayobjectLcdNumber)
-        #     self.detectThread.progressSignal.connect(self.setting_progress)
-        #     self.detectThread.start()
         self.StartNewResource(video_path)
 
     def activated(self):
