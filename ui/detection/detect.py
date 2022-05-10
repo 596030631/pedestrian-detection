@@ -64,6 +64,9 @@ class DetectThread(QThread):
 
     objectSignal = pyqtSignal(dict)
 
+    prob = 0.35
+    iou = 0.45
+
     running = True
 
     detect_pause = True
@@ -79,6 +82,11 @@ class DetectThread(QThread):
 
     def changeProb(self, intValue):
         print("模型检测置信度变化" + str(intValue))
+        self.prob = intValue / 100
+
+    def changeIOU(self, intValue):
+        print("模型检测IOU变化" + str(intValue))
+        self.iou = intValue / 100
 
     def run(self):
         self.running = True
@@ -204,7 +212,7 @@ class DetectThread(QThread):
             dt[1] += t3 - t2
 
             # NMS
-            pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det)
+            pred = non_max_suppression(pred, self.prob, self.iou, classes, agnostic_nms, max_det=max_det)
             dt[2] += time_sync() - t3
 
             # Second-stage classifier (optional)

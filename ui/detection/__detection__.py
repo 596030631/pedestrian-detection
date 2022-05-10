@@ -78,6 +78,8 @@ class DetectionDesigner(QMainWindow, Ui_MainWindow):
     def iouChange(self, value):
         print("IOU改变 " + str(value))
         self.iouSpinBox_2.setValue(value / 100)
+        if self.running:
+            self.detectThread.changeIOU(value)
 
     def action_save(self):
         print("save")
